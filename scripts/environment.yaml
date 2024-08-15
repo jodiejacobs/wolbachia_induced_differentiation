@@ -1,0 +1,16 @@
+name: coolbox
+
+channels:
+  - defaults
+  - conda-forge
+  - bioconda
+
+dependencies:
+  - python>=3.7
+  - pip
+  - pairix
+  - tabix
+  - samtools>=1.10
+  - libcurl
+  - pip:
+    - -r file:requirements.txt

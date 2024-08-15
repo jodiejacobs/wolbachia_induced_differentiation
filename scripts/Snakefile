@@ -1,0 +1,120 @@
+import glob
+
+# Set input and references directory
+input_dir='/scratch1/jodie/wolbachia/Micro-C/09Nov2023_Micro_C/trimmed'
+
+# List the samples in the directory 
+datasets = []
+files = glob.glob(input_dir + "/*R1_paired*")
+for filename in files:
+	datasets.append(filename.split("/")[-1].split(".'")[0].split("_")[0])
+
+
+# --config datasets=dir 
+
+rule all:
+        input:expand('map/{dataset}_matrix_1kb.cool', dataset =  datasets)
+
+rule bwa:
+        output: 'bam/{dataset}.sam',
+        input: 
+            R1 = 'trimmed/{dataset}_R1_paired.fastq.gz',
+            R2 = 'trimmed/{dataset}_R2_paired.fastq.gz',
+        log: 'logs/{dataset}.log',
+        shell:
+                '''
+                bwa mem -5SP -T0 -t 16 -o {output} \
+                /scratch1/jodie/wolbachia/Micro-C/09Nov2023_Micro_C/reference/dmel-all-chromosome_only-r6.46.fasta \
+                {input.R1} {input.R2}
+                '''
+
+rule pairtools1:
+        output:
+            pairsam = 'pairsam/{dataset}.pairsam',
+            sorted = 'pairsam/{dataset}.sorted.pairsam',
+        input: 'bam/{dataset}.sam',
+        params: 'tmp/{dataset}'
+        log: 'logs/{dataset}.log',
+        shell:
+                '''
+                mkdir {params}
+                pairtools parse --min-mapq 10 --walks-policy 5unique --max-inter-align-gap 30 --nproc-in 16 \
+                --nproc-out 16 --chroms-path /scratch1/jodie/wolbachia/Micro-C/09Nov2023_Micro_C/reference/dmel-all-chromosome_only-r6.46.genome {input} > {output.pairsam}
+                pairtools sort --nproc 16 --tmpdir {params} {output.pairsam} > {output.sorted}
+
+                '''
+
+
+rule pairtools2:
+        output:
+            mapped = 'pairsam/{dataset}.mapped.pairs.gz',
+            unsorted = 'pairsam/{dataset}.unsorted.bam',
+            dedup = 'pairsam/{dataset}.dedup.pairsam',
+            stats = 'QC/stats/{dataset}.stats',
+        input:
+            sorted = 'pairsam/{dataset}.sorted.pairsam',
+        params:
+            mapped = 'pairsam/{dataset}.mapped.pairs',
+        log: 'logs/{dataset}.log',
+        resources:
+                mem_mb = 10000,
+                runtime =10
+        shell:
+                '''
+
+                pairtools dedup --nproc-in 16 --nproc-out 16 --mark-dups --output-stats {output.stats} \
+                --output {output.dedup} {input.sorted}
+
+                pairtools split --nproc-in 16 --nproc-out 16 --output-pairs {params.mapped} \
+                --output-sam {output.unsorted} {output.dedup}
+                
+                bgzip {params.mapped}
+                '''
+
+rule samtools:
+        output: 'pairsam/{dataset}.mapped.PT.bam',
+
+        input: 'pairsam/{dataset}.unsorted.bam',
+        params: '../temp/{dataset}.temp.bam'
+        log: 'logs/{dataset}.log',
+        resources:
+                mem_mb = 10000,
+                runtime =10
+        shell:
+                '''
+                samtools sort -@16 -T {params} -o {output} {input}
+                samtools index {output}
+                '''
+
+rule preseq:
+        output: 'QC/stats/{dataset}.preseq',
+        input: 'pairsam/{dataset}.mapped.PT.bam',
+        log: 'logs/{dataset}.log',
+        resources:
+                mem_mb = 10000,
+                runtime =10
+        shell:
+            '''
+            preseq lc_extrap -v -bam -pe -extrap 2.10E+09 \
+            -step 1.00E+08 -seg_len 5000 -output {output} {input}
+            '''
+    
+rule cooler:
+        output: 'map/{dataset}_matrix_1kb.cool',
+        input:
+                mapped = 'pairsam/{dataset}.mapped.pairs.gz',
+                ref = '/scratch1/jodie/wolbachia/Micro-C/09Nov2023_Micro_C/reference/dmel-all-chromosome_only-r6.46.genome'
+        log: 'logs/{dataset}.log',        
+        resources:
+                mem_mb = 10000,
+                runtime =10
+        shell:
+                '''
+                pairix {input.mapped}
+                cooler cload pairix -p 16 {input.ref}:1000 {input.mapped} {output}
+                cooler zoomify --balance -p 16 {output}
+                java -Xmx48000m  -Djava.awt.headless=true -jar /home/jodie/Micro-C/juicertools.jar pre --threads 16 {input.mapped} {output} 
+                '''
+                
+#Follow with: python /scratch1/jodie/wolbachia/Micro-C/09Nov2023_Micro_C/run_mustache_v4.py
+#Output goes into PANGEA 
