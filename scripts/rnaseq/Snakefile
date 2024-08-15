@@ -1,0 +1,69 @@
+illuminaDataFolder = '/storage1/jodie/sequencing/wolbachia/azenta_illumina_01_09_23/zipped'
+
+conda: 'assembly.yaml'   
+
+#for f in *R1*; do echo "'${f:0:-16}'",; done
+datasets = ['JW18DOX221117-1',
+            'JW18DOX221117-2',
+            'JW18DOX221117-3',
+            'JW18DOX221117-4',
+            'JW18DOX221117-5',
+            'JW18DOX221117-6',
+            'JW18wMel221117-1',
+            'JW18wMel221117-2',
+            'JW18wMel221117-3',
+            'JW18wMel221117-4',
+            'JW18wMel221117-5',
+            'JW18wMel221117-6',
+            'S2DOX221117-1',
+            'S2DOX221117-2',
+            'S2DOX221117-3',
+            'S2DOX221117-4',
+            'S2DOX221117-5',
+            'S2DOX221117-6',
+            'S2wMel221117-1',
+            'S2wMel221117-2',
+            'S2wMel221117-3',
+            'S2wMel221117-4',
+            'S2wMel221117-5',
+            'S2wMel221117-6']
+            
+
+rule all:
+        input:expand('{dataset}_kallisto/wMel_abundance.h5', dataset = datasets)
+
+rule kallisto:
+        output: '{dataset}_kallisto/abundance.h5',
+        input: 
+            R1 = '/storage1/jodie/sequencing/wolbachia/azenta_illumina_01_09_23/zipped/{dataset}_R1_001.fastq.gz',
+            R2 = '/storage1/jodie/sequencing/wolbachia/azenta_illumina_01_09_23/zipped/{dataset}_R2_001.fastq.gz',
+            ref = '/scratch1/jodie/wolbachia/Dmelanogaster_wMel_RNAseq/reference_genomes/kallisto/Dmel6wMel2978.6_cds.rna_from_genomic.index',
+            gtf = '/scratch1/jodie/wolbachia/Dmelanogaster_wMel_RNAseq/reference_genomes/gtfs/Dmel6wMel2978.6.clean.gtf'
+
+        shell:
+                '''
+                kallisto quant -t 4 -b 100 -i {input.ref} -o {wildcards.dataset}_kallisto --gtf {input.gtf} {input.R1} {input.R2}
+                '''
+rule subset_output:
+        output: 
+            wMel = '{dataset}_kallisto/wMel_abundance.h5',
+            dMel = '{dataset}_kallisto/dMel_abundance.h5',
+        params: '{dataset}_kallisto/'
+        input: '{dataset}_kallisto/abundance.h5',
+        shell:
+            '''
+            python /home/jodie/pythonScripts/subset_kallisto.py \
+            -i {input} \
+            -o {params} \
+            -w 'wMel_abundance.h5' \
+            -d 'dMel_abundance.h5' \
+            > {params}/subset_kallisto.summary
+            '''
+
+rule sleuth:
+    output:
+    input:
+    shell:
+        '''
+        Rscript sleuth-kallisto_DE_analysis.combined.R
+        '''
