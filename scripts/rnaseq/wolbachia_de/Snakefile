@@ -1,0 +1,61 @@
+#Goal: Preprocess and pseudo-align RNA-seq reads usign trimmomatic and kallisto
+
+#path to this file: /scratch/alexlum/wolbachia/Snakefile
+#make sure to call "conda activate RNA-seq" before calling snakemake
+#call command: snakemake -j16 (use flag -n to test before running)
+
+#Global Variables:
+
+import os  
+import glob
+
+illuminaDataFolder = '/private/groups/russelllab/jodie/sequencing_data/azenta_illumina_01_09_23'
+
+files = [f for f in os.listdir(illuminaDataFolder) if os.path.isfile(os.path.join(illuminaDataFolder, f))]
+datasets = list(set([x.split("_")[0] for x in files]))
+
+conda: '/private/home/jomojaco/mambaforge/envs/RNA-seq'   
+
+rule all:
+        input:expand('kallisto_output/{dataset}/abundance.tsv', dataset =  datasets)
+
+rule trim_reads:
+    output:
+        paired_R1 = '/private/groups/russelllab/jodie/sequencing_data/azenta_illumina_01_09_23/trimmed/{dataset}_R1_paired.fastq.gz',
+        paired_R2 = '/private/groups/russelllab/jodie/sequencing_data/azenta_illumina_01_09_23/trimmed/{dataset}_R2_paired.fastq.gz',
+        unpaired_R1 = '/private/groups/russelllab/jodie/sequencing_data/azenta_illumina_01_09_23/trimmed/{dataset}_R1_unpaired.fq.gz',
+        unpaired_R2 = '/private/groups/russelllab/jodie/sequencing_data/azenta_illumina_01_09_23/trimmed/{dataset}_R2_unpaired.fq.gz',
+    input:
+        fastq_R1 = '/private/groups/russelllab/jodie/sequencing_data/azenta_illumina_01_09_23/{dataset}_R1_001.fastq.gz',
+        fastq_R2 = '/private/groups/russelllab/jodie/sequencing_data/azenta_illumina_01_09_23/{dataset}_R2_001.fastq.gz',
+    threads: 32
+    resources: mem_mb=10000
+    shell:
+        '''
+            trimmomatic PE -threads 32 -phred64 \
+                {input.fastq_R1} \
+                {input.fastq_R2} \
+                {output.paired_R1}\
+                {output.unpaired_R1} \
+                {output.paired_R2} \
+                {output.unpaired_R2} \
+                ILLUMINACLIP:TruSeq3-PE.fa:2:30:10:2:True LEADING:3 TRAILING:3 MINLEN:36
+
+        '''
+rule kallisto:
+    output: 'kallisto_output/{dataset}/abundance.tsv'
+    input:
+        paired_R1 = '/private/groups/russelllab/jodie/sequencing_data/azenta_illumina_01_09_23/trimmed/{dataset}_R1_paired.fastq.gz',
+        paired_R2 = '/private/groups/russelllab/jodie/sequencing_data/azenta_illumina_01_09_23/trimmed/{dataset}_R2_paired.fastq.gz',
+    params: 
+        kallisto_ref = '/private/groups/russelllab/jodie/reference_genomes/kallisto/Dmel6wMel2978.6_cds.rna_from_genomic.index',
+    threads: 32
+    resources: mem_mb=10000
+    shell:
+        '''
+            kallisto quant -t 32 -b 100 -i {params.kallisto_ref} \
+                -o kallisto_output/{wildcards.dataset} \
+                {input.paired_R1} \
+                {input.paired_R2}
+        '''
+    
