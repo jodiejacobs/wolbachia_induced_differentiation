@@ -1,0 +1,2 @@
+source,native,name,p_value,significant,description,term_size,query_size,intersection_size,effective_domain_size,precision,recall,query,parents
+KEGG,KEGG:00604,Glycosphingolipid biosynthesis - ganglio series,0.031221963329960207,True,Glycosphingolipid biosynthesis - ganglio series,5,2,1,3541,0.5,0.2,query_1,['KEGG:00000']

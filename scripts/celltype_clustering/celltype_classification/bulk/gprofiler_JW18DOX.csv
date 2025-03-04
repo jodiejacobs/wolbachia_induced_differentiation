@@ -1,0 +1,2 @@
+source,native,name,p_value,significant,description,term_size,query_size,intersection_size,effective_domain_size,precision,recall,query,parents
+GO:CC,GO:0043235,receptor complex,0.04514294848269765,True,"""Any protein complex that undergoes combination with a hormone, neurotransmitter, drug or intracellular messenger to initiate a change in cell function."" [GOC:go_curators]",75,5,2,12142,0.4,0.02666666666666667,query_1,['GO:0032991']
