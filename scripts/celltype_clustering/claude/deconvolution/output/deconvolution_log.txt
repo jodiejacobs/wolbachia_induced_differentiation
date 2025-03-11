@@ -1,0 +1,70 @@
+2025-03-11 14:21:45,242 - INFO - Starting cell type deconvolution pipeline
+2025-03-11 14:21:45,242 - INFO - Starting cell type deconvolution pipeline
+2025-03-11 14:22:13,582 - INFO - Starting cell type deconvolution pipeline
+2025-03-11 14:22:13,582 - INFO - Starting cell type deconvolution pipeline
+2025-03-11 14:23:01,996 - INFO - Starting cell type deconvolution pipeline
+2025-03-11 14:23:01,996 - INFO - Starting cell type deconvolution pipeline
+2025-03-11 14:23:01,996 - INFO - Starting cell type deconvolution pipeline
+2025-03-11 14:23:01,999 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-11 14:23:01,999 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-11 14:23:01,999 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-11 14:23:02,000 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/data/atlas/fca_subset.h5ad
+2025-03-11 14:23:02,000 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/data/atlas/fca_subset.h5ad
+2025-03-11 14:23:02,000 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/data/atlas/fca_subset.h5ad
+2025-03-11 14:23:02,001 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/output
+2025-03-11 14:23:02,001 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/output
+2025-03-11 14:23:02,001 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/output
+2025-03-11 14:23:02,003 - ERROR - Deconvolution pipeline failed: name 'load_and_validate_data' is not defined
+2025-03-11 14:23:02,003 - ERROR - Deconvolution pipeline failed: name 'load_and_validate_data' is not defined
+2025-03-11 14:23:02,003 - ERROR - Deconvolution pipeline failed: name 'load_and_validate_data' is not defined
+2025-03-11 14:23:02,005 - ERROR - Traceback (most recent call last):
+  File "/data/tmp/ipykernel_3526950/3649569402.py", line 17, in main
+    bulk_adata, ref_adata = load_and_validate_data(bulk_path, ref_path)
+NameError: name 'load_and_validate_data' is not defined
+
+2025-03-11 14:23:02,005 - ERROR - Traceback (most recent call last):
+  File "/data/tmp/ipykernel_3526950/3649569402.py", line 17, in main
+    bulk_adata, ref_adata = load_and_validate_data(bulk_path, ref_path)
+NameError: name 'load_and_validate_data' is not defined
+
+2025-03-11 14:23:02,005 - ERROR - Traceback (most recent call last):
+  File "/data/tmp/ipykernel_3526950/3649569402.py", line 17, in main
+    bulk_adata, ref_adata = load_and_validate_data(bulk_path, ref_path)
+NameError: name 'load_and_validate_data' is not defined
+
+2025-03-11 14:23:51,242 - INFO - Starting cell type deconvolution pipeline
+2025-03-11 14:23:51,242 - INFO - Starting cell type deconvolution pipeline
+2025-03-11 14:23:51,242 - INFO - Starting cell type deconvolution pipeline
+2025-03-11 14:23:51,246 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-11 14:23:51,246 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-11 14:23:51,246 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-11 14:23:51,247 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/data/atlas/fca_subset.h5ad
+2025-03-11 14:23:51,247 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/data/atlas/fca_subset.h5ad
+2025-03-11 14:23:51,247 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/data/atlas/fca_subset.h5ad
+2025-03-11 14:23:51,248 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/output
+2025-03-11 14:23:51,248 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/output
+2025-03-11 14:23:51,248 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/output
+2025-03-11 14:23:51,249 - INFO - Loading data files...
+2025-03-11 14:23:51,249 - INFO - Loading data files...
+2025-03-11 14:23:51,249 - INFO - Loading data files...
+2025-03-11 14:23:51,734 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-11 14:23:51,734 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-11 14:23:51,734 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-11 14:23:51,740 - ERROR - Deconvolution pipeline failed: cannot unpack non-iterable NoneType object
+2025-03-11 14:23:51,740 - ERROR - Deconvolution pipeline failed: cannot unpack non-iterable NoneType object
+2025-03-11 14:23:51,740 - ERROR - Deconvolution pipeline failed: cannot unpack non-iterable NoneType object
+2025-03-11 14:23:51,743 - ERROR - Traceback (most recent call last):
+  File "/data/tmp/ipykernel_3526950/3649569402.py", line 17, in main
+    bulk_adata, ref_adata = load_and_validate_data(bulk_path, ref_path)
+TypeError: cannot unpack non-iterable NoneType object
+
+2025-03-11 14:23:51,743 - ERROR - Traceback (most recent call last):
+  File "/data/tmp/ipykernel_3526950/3649569402.py", line 17, in main
+    bulk_adata, ref_adata = load_and_validate_data(bulk_path, ref_path)
+TypeError: cannot unpack non-iterable NoneType object
+
+2025-03-11 14:23:51,743 - ERROR - Traceback (most recent call last):
+  File "/data/tmp/ipykernel_3526950/3649569402.py", line 17, in main
+    bulk_adata, ref_adata = load_and_validate_data(bulk_path, ref_path)
+TypeError: cannot unpack non-iterable NoneType object
+
