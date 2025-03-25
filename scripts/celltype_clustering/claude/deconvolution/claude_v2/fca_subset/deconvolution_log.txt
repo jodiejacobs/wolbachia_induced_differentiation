@@ -1,0 +1,78 @@
+2025-03-12 17:15:59,595 - INFO - Starting enhanced cell type deconvolution pipeline
+2025-03-12 17:15:59,595 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-12 17:15:59,595 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/data/atlas/fca_subset.h5ad
+2025-03-12 17:15:59,596 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/claude_v2/fca_subset
+2025-03-12 17:15:59,596 - INFO - Normalization method: all
+2025-03-12 17:18:30,250 - INFO - Using 1234 shared genes
+2025-03-12 17:20:23,359 - INFO - Trying all normalization methods and selecting the best
+2025-03-12 17:27:03,597 - ERROR - Deconvolution pipeline failed: Bin edges must be unique: Index([nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan,
+       nan, nan, nan, nan, nan, nan, nan],
+      dtype='float64').
+You can drop duplicate edges by setting the 'duplicates' kwarg
+2025-03-12 17:27:03,666 - ERROR - Traceback (most recent call last):
+  File "/private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/claude_v2/main_deconvolution.py", line 154, in main
+    harmonized_bulk, harmonized_ref = harmonize_datasets(bulk_subset, ref_subset, shared_genes)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/claude_v2/cell_type_deconvolution.py", line 195, in harmonize_datasets
+    sc.pp.highly_variable_genes(ref_subset, n_top_genes=2000, flavor="seurat")
+  File "/private/home/jomojaco/mambaforge/envs/scanpy/lib/python3.12/site-packages/legacy_api_wrap/__init__.py", line 80, in fn_compatible
+    return fn(*args_all, **kw)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/private/home/jomojaco/mambaforge/envs/scanpy/lib/python3.12/site-packages/scanpy/preprocessing/_highly_variable_genes.py", line 648, in highly_variable_genes
+    df = _highly_variable_genes_single_batch(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/home/jomojaco/mambaforge/envs/scanpy/lib/python3.12/site-packages/scanpy/preprocessing/_highly_variable_genes.py", line 281, in _highly_variable_genes_single_batch
+    df["mean_bin"] = _get_mean_bins(df["means"], flavor, n_bins)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/home/jomojaco/mambaforge/envs/scanpy/lib/python3.12/site-packages/scanpy/preprocessing/_highly_variable_genes.py", line 307, in _get_mean_bins
+    return pd.cut(means, bins=bins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/home/jomojaco/mambaforge/envs/scanpy/lib/python3.12/site-packages/pandas/core/reshape/tile.py", line 257, in cut
+    fac, bins = _bins_to_cuts(
+                ^^^^^^^^^^^^^^
+  File "/private/home/jomojaco/mambaforge/envs/scanpy/lib/python3.12/site-packages/pandas/core/reshape/tile.py", line 443, in _bins_to_cuts
+    raise ValueError(
+ValueError: Bin edges must be unique: Index([nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan,
+       nan, nan, nan, nan, nan, nan, nan],
+      dtype='float64').
+You can drop duplicate edges by setting the 'duplicates' kwarg
+
+2025-03-12 17:55:57,178 - INFO - Starting enhanced cell type deconvolution pipeline
+2025-03-12 17:55:57,181 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-12 17:55:57,181 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/data/atlas/fca_subset.h5ad
+2025-03-12 17:55:57,181 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/claude_v2/fca_subset
+2025-03-12 17:55:57,182 - INFO - Normalization method: all
+2025-03-12 17:57:25,074 - INFO - Using 1234 shared genes
+2025-03-12 17:58:14,745 - INFO - Trying all normalization methods and selecting the best
+2025-03-12 18:00:42,295 - ERROR - Deconvolution pipeline failed: Bin edges must be unique: Index([nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan,
+       nan, nan, nan, nan, nan, nan, nan],
+      dtype='float64').
+You can drop duplicate edges by setting the 'duplicates' kwarg
+2025-03-12 18:00:42,301 - ERROR - Traceback (most recent call last):
+  File "/private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/claude_v2/main_deconvolution.py", line 154, in main
+    harmonized_bulk, harmonized_ref = harmonize_datasets(bulk_subset, ref_subset, shared_genes)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/claude_v2/cell_type_deconvolution.py", line 195, in harmonize_datasets
+    sc.pp.highly_variable_genes(ref_subset, n_top_genes=2000, flavor="seurat")
+  File "/private/home/jomojaco/mambaforge/envs/scanpy/lib/python3.12/site-packages/legacy_api_wrap/__init__.py", line 80, in fn_compatible
+    return fn(*args_all, **kw)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/private/home/jomojaco/mambaforge/envs/scanpy/lib/python3.12/site-packages/scanpy/preprocessing/_highly_variable_genes.py", line 648, in highly_variable_genes
+    df = _highly_variable_genes_single_batch(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/home/jomojaco/mambaforge/envs/scanpy/lib/python3.12/site-packages/scanpy/preprocessing/_highly_variable_genes.py", line 281, in _highly_variable_genes_single_batch
+    df["mean_bin"] = _get_mean_bins(df["means"], flavor, n_bins)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/home/jomojaco/mambaforge/envs/scanpy/lib/python3.12/site-packages/scanpy/preprocessing/_highly_variable_genes.py", line 307, in _get_mean_bins
+    return pd.cut(means, bins=bins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/home/jomojaco/mambaforge/envs/scanpy/lib/python3.12/site-packages/pandas/core/reshape/tile.py", line 257, in cut
+    fac, bins = _bins_to_cuts(
+                ^^^^^^^^^^^^^^
+  File "/private/home/jomojaco/mambaforge/envs/scanpy/lib/python3.12/site-packages/pandas/core/reshape/tile.py", line 443, in _bins_to_cuts
+    raise ValueError(
+ValueError: Bin edges must be unique: Index([nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan, nan,
+       nan, nan, nan, nan, nan, nan, nan],
+      dtype='float64').
+You can drop duplicate edges by setting the 'duplicates' kwarg
+

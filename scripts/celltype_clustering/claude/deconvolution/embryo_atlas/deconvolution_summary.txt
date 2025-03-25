@@ -1,0 +1,67 @@
+Cell Type Deconvolution Summary
+===============================
+
+Bulk dataset: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+Reference dataset: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/embryo_adata_dense.h5ad
+Number of bulk samples: 24
+Number of reference cells: 502680
+Number of shared genes: 10618
+Number of cell types: 54
+
+Validation correlation score: 0.906
+
+Top cell types by average proportion:
+  germ cell: 0.361
+  maternal: 0.326
+  plasmatocytes: 0.155
+  muscle: 0.141
+  anlage in statu nascendi: 0.009
+  yolk nuclei: 0.008
+  cellular blastoderm / pole cell: 0.000
+  crystal cell: 0.000
+  procrystal cell: 0.000
+  proventriculus: 0.000
+  salivary gland: 0.000
+  salivary gland body primordium: 0.000
+  salivary gland primordium: 0.000
+  sensory nervous system: 0.000
+  sensory nervous system primordium: 0.000
+  somatic muscle: 0.000
+  somatic muscle primordium: 0.000
+  spiracle (tracheal system): 0.000
+  spiracles (tracheal system): 0.000
+  tracheal primordium: 0.000
+  tracheal system: 0.000
+  trunk mesoderm primordium: 0.000
+  ubiquitous: 0.000
+  unknown: 0.000
+  ventral nerve cord: 0.000
+  ventral nerve cord primordium: 0.000
+  ventral nerve cord : 0.000
+  visceral muscle: 0.000
+  visceral muscle primordium: 0.000
+  plasmatocytes anlage: 0.000
+  brain: 0.000
+  peripheral nervous system primordium: 0.000
+  foregut / hindgut primordium: 0.000
+  ectoderm anlage: 0.000
+  ectoderm anlage in statu nascendi: 0.000
+  ectoderm primordium: 0.000
+  endoderm primordium: 0.000
+  epidermis: 0.000
+  epidermis primordium: 0.000
+  epidermis : 0.000
+  fat body: 0.000
+  foregut / hindgut / anal pad: 0.000
+  brain : 0.000
+  peripheral nervous system: 0.000
+  glia: 0.000
+  hindgut / anal pad: 0.000
+  hindgut primordium: 0.000
+  brain primordium: 0.000
+  mesoderm primordium: 0.000
+  midgut: 0.000
+  midgut primordium: 0.000
+  midline primordium: 0.000
+  amnioserosa: 0.000
+  Malpighian tubule: 0.000

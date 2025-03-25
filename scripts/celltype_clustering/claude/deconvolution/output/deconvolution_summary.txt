@@ -1,0 +1,239 @@
+Cell Type Deconvolution Summary
+===============================
+
+Bulk dataset: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+Reference dataset: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/data/atlas/fca_subset.h5ad
+Number of bulk samples: 24
+Number of reference cells: 5000
+Number of shared genes: 1234
+Number of cell types: 226
+
+Validation correlation score: 0.617
+
+Top cell types by average proportion:
+  hemocyte: 0.194
+  adult tracheal cell: 0.103
+  adult fat body: 0.045
+  secretory cell of the male reproductive tract: 0.032
+  16-cell germline cyst in germarium region 2a and 2b: 0.031
+  male accessory gland main cell: 0.031
+  adult Malpighian tubule principal cell of lower segment: 0.030
+  epithelial cell: 0.030
+  adult ventral nervous system: 0.027
+  ejaculatory bulb epithelium: 0.026
+  male accessory gland: 0.022
+  cell body glial cell: 0.021
+  adult heart ventral longitudinal muscle: 0.020
+  adult Malpighian tubule principal cell of lower ureter: 0.019
+  cyst stem cell: 0.019
+  seminal vesicle: 0.018
+  antimicrobial peptide-producing cell: 0.017
+  spermatocyte 7a: 0.016
+  early cyst cell 1: 0.016
+  follicle stem cell and prefollicle cell: 0.015
+  enterocyte-like: 0.015
+  adult brain cell body glial cell: 0.014
+  adult alary muscle: 0.012
+  ejaculatory bulb: 0.012
+  eo support cell: 0.011
+  male gonad associated epithelium: 0.011
+  spermatocyte: 0.010
+  leg muscle motor neuron: 0.009
+  germline cell: 0.009
+  crop: 0.009
+  cyst cell branch b: 0.009
+  adult midgut enterocyte: 0.008
+  enterocyte of anterior adult midgut epithelium: 0.007
+  early cyst cell 2: 0.007
+  stalk follicle cell: 0.006
+  photoreceptor-like: 0.006
+  adult antenna glial cell: 0.006
+  principal cell*: 0.006
+  late primary spermatocyte: 0.006
+  adult Malpighian tubule stellate cell of main segment: 0.006
+  stretch follicle cell: 0.005
+  late cyst cell branch b: 0.005
+  adult peripheral neuron of the heart: 0.005
+  unannotated: 0.005
+  adult pylorus: 0.005
+  pheromone-sensing neuron: 0.005
+  muscle cell: 0.004
+  enterocyte of posterior adult midgut epithelium: 0.004
+  spermatocyte cyst cell branch a: 0.003
+  Johnston organ neuron: 0.003
+  epidermal cell that specialized in antimicrobial response: 0.003
+  peripheral glial cell: 0.002
+  tendon cell: 0.002
+  cardia (1): 0.002
+  pigment cell: 0.002
+  adult olfactory receptor neuron acid-sensing, Ir75a/b/c, Ir64a: 0.002
+  adult midgut*: 0.002
+  crystal cell: 0.002
+  Kenyon cell: 0.002
+  enteroblast: 0.002
+  dopaminergic PAM neuron: 0.002
+  cyst cell branch a: 0.001
+  lamina intrinsic amacrine neuron Lai: 0.001
+  maxillary palpus: 0.001
+  gustatory receptor neuron of the labellum: 0.001
+  sacculus/arista neuron: 0.001
+  btl-GAL4 positive female cell, likely to be ovary cell, sim+, H15+: 0.001
+  adult salivary gland: 0.001
+  distal medullary amacrine neuron Dm10: 0.001
+  oviduct: 0.001
+  adult oenocyte: 0.001
+  follicle cell: 0.001
+  btl-GAL4 positive female cell, cluster 2, likely to be ovary cell: 0.001
+  gamma Kenyon cell: 0.001
+  main body follicle cell ca. until St. 5: 0.001
+  head cyst cell: 0.000
+  central main body follicle cell ca. St. 6-8: 0.000
+  adult olfactory receptor neuron Gr21a/63a: 0.000
+  bitter-sensitive labellar taste bristle: 0.000
+  photoreceptor: 0.000
+  midgut: 0.000
+  ensheathing glial cell: 0.000
+  adult neuron: 0.000
+  adult Malpighian tubule principal cell: 0.000
+  medullary intrinsic neuron Mi1: 0.000
+  spermatocyte 0: 0.000
+  scolopidial neuron: 0.000
+  btl-GAL4 positive female cell, likely to be ovary cell, sim+: 0.000
+  transmedullary Y neuron TmY4: 0.000
+  spermatogonium: 0.000
+  spermatocyte cyst cell branch b: 0.000
+  adult brain perineurial glial cell: 0.000
+  labral sense organ mechanosensory neuron: 0.000
+  intestinal stem cell: 0.000
+  adult olfactory receptor neuron Or67d: 0.000
+  adult lamina epithelial/marginal glial cell: 0.000
+  alpha/beta Kenyon cell: 0.000
+  neuron of haltere: 0.000
+  polar follicle cell: 0.000
+  photoreceptor cell R7: 0.000
+  mechanosensory neuron: 0.000
+  T neuron T4/T5: 0.000
+  adult reticular neuropil associated glial cell: 0.000
+  medullary intrinsic neuron Mi4: 0.000
+  ocellus retinula cell: 0.000
+  T neuron T2a: 0.000
+  adult olfactory receptor neuron Or67a and likely other unknown ORN types: 0.000
+  alpha'/beta' Kenyon cell: 0.000
+  lamina monopolar neuron L3: 0.000
+  transmedullary neuron Tm1: 0.000
+  mechanosensory neuron of leg chordotonal organ: 0.000
+  medullary intrinsic neuron Mi9: 0.000
+  indirect flight muscle: 0.000
+  adult esophagus: 0.000
+  escort cell: 0.000
+  adult renal stem cell: 0.000
+  lamina monopolar neuron L2: 0.000
+  lamina wide-field 2 neuron: 0.000
+  lamina monopolar neuron L1: 0.000
+  adult olfactory receptor neuron Or85a, Or43b: 0.000
+  distal medullary amacrine neuron Dm3: 0.000
+  sensory neuron: 0.000
+  pericerebral adult fat mass: 0.000
+  adult glial cell: 0.000
+  adult Malpighian tubule: 0.000
+  male accessory gland secondary cell: 0.000
+  anterior ejaculatory duct: 0.000
+  transmedullary neuron Tm2: 0.000
+  transmedullary neuron Tm29: 0.000
+  enteroendocrine cell: 0.000
+  Poxn neuron: 0.000
+  outer photoreceptor cell: 0.000
+  cardia (2): 0.000
+  cyst cell intermediate: 0.000
+  adult Malpighian tubule bar-shaped cell of initial segment: 0.000
+  tormogen cell: 0.000
+  cone cell: 0.000
+  distal medullary amacrine neuron Dm8: 0.000
+  mechanosensory neuron of haltere: 0.000
+  adult olfactory receptor neuron Or47b: 0.000
+  lamina monopolar neuron L5: 0.000
+  lamina wide-field 1 neuron: 0.000
+  gustatory receptor neuron: 0.000
+  mid-late elongation-stage spermatid: 0.000
+  adult Malpighian tubule principal cell of initial segment: 0.000
+  photoreceptor cell R8: 0.000
+  post-mitotic germ cell early 16-cell cyst: 0.000
+  transmedullary neuron Tm5c: 0.000
+  transmedullary neuron Tm4: 0.000
+  transmedullary neuron Tm9: 0.000
+  transmedullary neuron Tm3a: 0.000
+  transmedullary neuron Tm20: 0.000
+  post-mitotic endocycling nurse cell: 0.000
+  visceral muscle of the crop: 0.000
+  visceral muscle of the midgut: 0.000
+  adult abdominal pericardial cell: 0.000
+  subperineurial glial cell: 0.000
+  transmedullary Y neuron TmY5a: 0.000
+  T neuron T2: 0.000
+  T neuron T3: 0.000
+  posterior midgut*: 0.000
+  posterior terminal follicle cell ca. St. 5-8: 0.000
+  spermatogonium-spermatocyte transition: 0.000
+  proximal medullary amacrine neuron Pm2: 0.000
+  T neuron T4/T5a-b: 0.000
+  spermatocyte 6: 0.000
+  spermatocyte 5: 0.000
+  spermatocyte 3: 0.000
+  spermatocyte 2: 0.000
+  skeletal muscle of head: 0.000
+  spermatid: 0.000
+  T neuron T4/T5c-d: 0.000
+  spermatocyte 4: 0.000
+  maxillary palp olfactory receptor neuron: 0.000
+  perineurial glial sheath: 0.000
+  adult hindgut: 0.000
+  germ cell stage 4 and later: 0.000
+  female reproductive system: 0.000
+  adult olfactory receptor neuron Or88a: 0.000
+  adult olfactory receptor neuron Or92a: 0.000
+  adult olfactory receptor neuron acid-sensing, Ir64a: 0.000
+  adult olfactory receptor neuron unknown type, Orco-: 0.000
+  adult optic chiasma glial cell: 0.000
+  adult peripheral nervous system: 0.000
+  early-mid elongation-stage spermatid: 0.000
+  early elongation stage spermatid: 0.000
+  dorsal appendage forming follicle cell: 0.000
+  antennal lobe projection neuron: 0.000
+  distal medullary amacrine neuron Dm12: 0.000
+  distal medullary amacrine neuron Dm9: 0.000
+  artefact: 0.000
+  auditory sensory neuron: 0.000
+  btl-GAL4 positive female cell, cluster 1, likely to be ovary cell: 0.000
+  columnar neuron T1: 0.000
+  choriogenic main body follicle cell and corpus luteum: 0.000
+  choriogenic main body follicle cell St. 14: 0.000
+  choriogenic main body follicle cell St. 12: 0.000
+  centrifugal neuron C3: 0.000
+  centrifugal neuron C2: 0.000
+  adult olfactory receptor neuron Or65: 0.000
+  germline cell, unknown stage: 0.000
+  adult olfactory receptor neuron Or47a, Or56a and likely other ORN types: 0.000
+  male reproductive tract muscle: 0.000
+  ovary cell: 0.000
+  ovarian sheath muscle: 0.000
+  optic-lobe-associated cortex glial cell: 0.000
+  olfactory receptor neuron, coeloconics: 0.000
+  olfactory receptor neuron: 0.000
+  multidendritic neuron: 0.000
+  mid-late proliferating spermatogonia: 0.000
+  medullary intrinsic neuron Mi15: 0.000
+  adult midgut-hindgut hybrid zone: 0.000
+  cardiomyocyte, working adult heart muscle (non-ostia): 0.000
+  male germline differentiating cell: 0.000
+  adult olfactory receptor neuron Or22a, Or42b, Or59b: 0.000
+  adult olfactory receptor neuron Ir56a+, Orco-: 0.000
+  lobula columnar neuron LC17: 0.000
+  lobula columnar neuron LC12: 0.000
+  lobula columnar neuron LC10: 0.000
+  leg taste bristle chemosensory neuron: 0.000
+  adult olfactory receptor neuron Ir75d: 0.000
+  adult olfactory receptor neuron Ir84a, Ir31a, Ir76a, Ir76b, Ir8a, Or35a: 0.000
+  adult olfactory receptor neuron Or13a: 0.000
+  late cyst cell branch a: 0.000
+  lamina monopolar neuron L4: 0.000
+  young germ cell: 0.000

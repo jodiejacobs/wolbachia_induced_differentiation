@@ -1,0 +1,14 @@
+======= Cell Type Deconvolution Summary =======
+Date: Wed Mar 12 06:00:47 PM PDT 2025
+Bulk dataset: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+Reference dataset: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/data/atlas/fca_subset.h5ad
+Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/claude_v2/fca_subset
+Annotation column: annotation
+Normalization method: all
+=======================================
+
+Generated files:
+total 8
+-rw-r--r-- 1 jomojaco russelllab 6894 Mar 12 18:00 deconvolution_log.txt
+-rw-r--r-- 1 jomojaco russelllab  611 Mar 12 18:00 deconvolution_report.txt
+drwxr-sr-x 2 jomojaco russelllab   15 Mar 12 17:25 plots

@@ -1,0 +1,742 @@
+2025-03-13 09:49:05,230 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 09:49:05,232 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 09:49:05,235 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 09:49:05,235 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 09:49:05,237 - INFO - Loading data files...
+2025-03-13 09:49:05,425 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 09:49:07,064 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 09:49:07,069 - INFO - Number of shared genes: 1024
+2025-03-13 09:49:07,071 - INFO - Preprocessing datasets...
+2025-03-13 09:49:07,828 - INFO - Using 1024 shared genes
+2025-03-13 09:49:09,021 - INFO - Integrating datasets...
+2025-03-13 09:49:09,179 - INFO - Combined dataset shape: (14423, 1024)
+2025-03-13 09:49:09,181 - INFO - Data is already normalized and log-transformed
+2025-03-13 09:49:09,540 - INFO - Applying BBKNN batch correction...
+2025-03-13 09:49:49,221 - INFO - Integrating datasets...
+2025-03-13 09:49:49,396 - INFO - Combined dataset shape: (14423, 1024)
+2025-03-13 09:49:49,398 - INFO - Data is already normalized and log-transformed
+2025-03-13 09:49:49,751 - INFO - Applying BBKNN batch correction...
+2025-03-13 09:50:12,504 - INFO - Integrating datasets...
+2025-03-13 09:50:12,661 - INFO - Combined dataset shape: (14423, 1024)
+2025-03-13 09:50:12,664 - INFO - Data is already normalized and log-transformed
+2025-03-13 09:50:13,020 - INFO - Applying BBKNN batch correction...
+2025-03-13 09:51:04,425 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 09:51:04,425 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 09:51:04,426 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 09:51:04,426 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 09:51:04,427 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 09:51:04,427 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 09:51:04,429 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 09:51:04,429 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 09:51:04,431 - INFO - Loading data files...
+2025-03-13 09:51:04,431 - INFO - Loading data files...
+2025-03-13 09:51:04,653 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 09:51:04,653 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 09:51:06,367 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 09:51:06,367 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 09:51:06,373 - INFO - Number of shared genes: 1024
+2025-03-13 09:51:06,373 - INFO - Number of shared genes: 1024
+2025-03-13 09:51:06,379 - INFO - Preprocessing datasets...
+2025-03-13 09:51:06,379 - INFO - Preprocessing datasets...
+2025-03-13 09:51:07,314 - INFO - Using 1024 shared genes
+2025-03-13 09:51:07,314 - INFO - Using 1024 shared genes
+2025-03-13 09:51:08,520 - INFO - Integrating datasets...
+2025-03-13 09:51:08,520 - INFO - Integrating datasets...
+2025-03-13 09:51:08,672 - INFO - Combined dataset shape: (14423, 1024)
+2025-03-13 09:51:08,672 - INFO - Combined dataset shape: (14423, 1024)
+2025-03-13 09:51:08,674 - INFO - Data is already normalized and log-transformed
+2025-03-13 09:51:08,674 - INFO - Data is already normalized and log-transformed
+2025-03-13 09:51:09,026 - INFO - Applying BBKNN batch correction...
+2025-03-13 09:51:09,026 - INFO - Applying BBKNN batch correction...
+2025-03-13 09:51:11,467 - INFO - Performing kNN classification with k=20...
+2025-03-13 09:51:11,467 - INFO - Performing kNN classification with k=20...
+2025-03-13 09:51:11,474 - INFO - Reference cells: 14399, Bulk samples: 24
+2025-03-13 09:51:11,474 - INFO - Reference cells: 14399, Bulk samples: 24
+2025-03-13 09:51:14,146 - INFO - kNN classification completed
+2025-03-13 09:51:14,146 - INFO - kNN classification completed
+2025-03-13 09:51:14,149 - INFO - Generating UMAP visualizations...
+2025-03-13 09:51:14,149 - INFO - Generating UMAP visualizations...
+2025-03-13 09:52:50,097 - INFO - UMAP visualizations completed
+2025-03-13 09:52:50,097 - INFO - UMAP visualizations completed
+2025-03-13 09:52:50,634 - INFO - Integration pipeline completed successfully
+2025-03-13 09:52:50,634 - INFO - Integration pipeline completed successfully
+2025-03-13 09:52:50,637 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 09:52:50,637 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 09:58:43,095 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 09:58:43,095 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 09:58:43,095 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 09:58:43,097 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 09:58:43,097 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 09:58:43,097 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 09:58:43,098 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 09:58:43,098 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 09:58:43,098 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 09:58:43,100 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 09:58:43,100 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 09:58:43,100 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 09:58:43,101 - INFO - Loading data files...
+2025-03-13 09:58:43,101 - INFO - Loading data files...
+2025-03-13 09:58:43,101 - INFO - Loading data files...
+2025-03-13 09:58:43,282 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 09:58:43,282 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 09:58:43,282 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 09:58:44,956 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 09:58:44,956 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 09:58:44,956 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 09:58:44,961 - INFO - Number of shared genes: 1024
+2025-03-13 09:58:44,961 - INFO - Number of shared genes: 1024
+2025-03-13 09:58:44,961 - INFO - Number of shared genes: 1024
+2025-03-13 09:58:44,966 - INFO - Preprocessing datasets...
+2025-03-13 09:58:44,966 - INFO - Preprocessing datasets...
+2025-03-13 09:58:44,966 - INFO - Preprocessing datasets...
+2025-03-13 09:58:45,700 - INFO - Using 1024 shared genes
+2025-03-13 09:58:45,700 - INFO - Using 1024 shared genes
+2025-03-13 09:58:45,700 - INFO - Using 1024 shared genes
+2025-03-13 09:58:48,860 - INFO - Integrating datasets...
+2025-03-13 09:58:48,860 - INFO - Integrating datasets...
+2025-03-13 09:58:48,860 - INFO - Integrating datasets...
+2025-03-13 09:58:48,894 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 09:58:48,894 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 09:58:48,894 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 09:58:48,896 - INFO - Data is already normalized and log-transformed
+2025-03-13 09:58:48,896 - INFO - Data is already normalized and log-transformed
+2025-03-13 09:58:48,896 - INFO - Data is already normalized and log-transformed
+2025-03-13 09:58:48,914 - INFO - Applying BBKNN batch correction...
+2025-03-13 09:58:48,914 - INFO - Applying BBKNN batch correction...
+2025-03-13 09:58:48,914 - INFO - Applying BBKNN batch correction...
+2025-03-13 09:58:49,089 - INFO - Performing kNN classification with k=20...
+2025-03-13 09:58:49,089 - INFO - Performing kNN classification with k=20...
+2025-03-13 09:58:49,089 - INFO - Performing kNN classification with k=20...
+2025-03-13 09:58:49,091 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 09:58:49,091 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 09:58:49,091 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 09:58:49,927 - INFO - kNN classification completed
+2025-03-13 09:58:49,927 - INFO - kNN classification completed
+2025-03-13 09:58:49,927 - INFO - kNN classification completed
+2025-03-13 09:58:49,929 - INFO - Generating UMAP visualizations...
+2025-03-13 09:58:49,929 - INFO - Generating UMAP visualizations...
+2025-03-13 09:58:49,929 - INFO - Generating UMAP visualizations...
+2025-03-13 09:59:12,276 - INFO - UMAP visualizations completed
+2025-03-13 09:59:12,276 - INFO - UMAP visualizations completed
+2025-03-13 09:59:12,276 - INFO - UMAP visualizations completed
+2025-03-13 09:59:12,911 - INFO - Integration pipeline completed successfully
+2025-03-13 09:59:12,911 - INFO - Integration pipeline completed successfully
+2025-03-13 09:59:12,911 - INFO - Integration pipeline completed successfully
+2025-03-13 09:59:12,913 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 09:59:12,913 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 09:59:12,913 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 09:59:12,914 - INFO - Plotting UMAP...
+2025-03-13 09:59:12,914 - INFO - Plotting UMAP...
+2025-03-13 09:59:12,914 - INFO - Plotting UMAP...
+2025-03-13 10:02:01,429 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 10:02:01,429 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 10:02:01,429 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 10:02:01,429 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 10:02:01,432 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 10:02:01,432 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 10:02:01,432 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 10:02:01,432 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 10:02:01,433 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 10:02:01,433 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 10:02:01,433 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 10:02:01,433 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 10:02:01,435 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 10:02:01,435 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 10:02:01,435 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 10:02:01,435 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 10:02:01,437 - INFO - Loading data files...
+2025-03-13 10:02:01,437 - INFO - Loading data files...
+2025-03-13 10:02:01,437 - INFO - Loading data files...
+2025-03-13 10:02:01,437 - INFO - Loading data files...
+2025-03-13 10:02:02,072 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 10:02:02,072 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 10:02:02,072 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 10:02:02,072 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 10:02:03,531 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 10:02:03,531 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 10:02:03,531 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 10:02:03,531 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 10:02:03,536 - INFO - Number of shared genes: 1024
+2025-03-13 10:02:03,536 - INFO - Number of shared genes: 1024
+2025-03-13 10:02:03,536 - INFO - Number of shared genes: 1024
+2025-03-13 10:02:03,536 - INFO - Number of shared genes: 1024
+2025-03-13 10:02:03,542 - INFO - Preprocessing datasets...
+2025-03-13 10:02:03,542 - INFO - Preprocessing datasets...
+2025-03-13 10:02:03,542 - INFO - Preprocessing datasets...
+2025-03-13 10:02:03,542 - INFO - Preprocessing datasets...
+2025-03-13 10:02:04,301 - INFO - Using 1024 shared genes
+2025-03-13 10:02:04,301 - INFO - Using 1024 shared genes
+2025-03-13 10:02:04,301 - INFO - Using 1024 shared genes
+2025-03-13 10:02:04,301 - INFO - Using 1024 shared genes
+2025-03-13 10:02:07,452 - INFO - Integrating datasets...
+2025-03-13 10:02:07,452 - INFO - Integrating datasets...
+2025-03-13 10:02:07,452 - INFO - Integrating datasets...
+2025-03-13 10:02:07,452 - INFO - Integrating datasets...
+2025-03-13 10:02:07,482 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 10:02:07,482 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 10:02:07,482 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 10:02:07,482 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 10:02:07,484 - INFO - Data is already normalized and log-transformed
+2025-03-13 10:02:07,484 - INFO - Data is already normalized and log-transformed
+2025-03-13 10:02:07,484 - INFO - Data is already normalized and log-transformed
+2025-03-13 10:02:07,484 - INFO - Data is already normalized and log-transformed
+2025-03-13 10:02:07,497 - INFO - Applying BBKNN batch correction...
+2025-03-13 10:02:07,497 - INFO - Applying BBKNN batch correction...
+2025-03-13 10:02:07,497 - INFO - Applying BBKNN batch correction...
+2025-03-13 10:02:07,497 - INFO - Applying BBKNN batch correction...
+2025-03-13 10:02:07,671 - INFO - Performing kNN classification with k=20...
+2025-03-13 10:02:07,671 - INFO - Performing kNN classification with k=20...
+2025-03-13 10:02:07,671 - INFO - Performing kNN classification with k=20...
+2025-03-13 10:02:07,671 - INFO - Performing kNN classification with k=20...
+2025-03-13 10:02:07,674 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 10:02:07,674 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 10:02:07,674 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 10:02:07,674 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 10:02:08,458 - INFO - kNN classification completed
+2025-03-13 10:02:08,458 - INFO - kNN classification completed
+2025-03-13 10:02:08,458 - INFO - kNN classification completed
+2025-03-13 10:02:08,458 - INFO - kNN classification completed
+2025-03-13 10:02:08,460 - INFO - Generating UMAP visualizations...
+2025-03-13 10:02:08,460 - INFO - Generating UMAP visualizations...
+2025-03-13 10:02:08,460 - INFO - Generating UMAP visualizations...
+2025-03-13 10:02:08,460 - INFO - Generating UMAP visualizations...
+2025-03-13 10:21:38,804 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 10:21:38,805 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 10:21:38,806 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 10:21:38,809 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 10:21:38,810 - INFO - Loading data files...
+2025-03-13 10:21:38,967 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 10:21:40,017 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 10:21:40,022 - INFO - Number of shared genes: 1024
+2025-03-13 10:21:40,024 - INFO - Preprocessing datasets...
+2025-03-13 10:21:40,785 - INFO - Using 1024 shared genes
+2025-03-13 10:21:44,083 - INFO - Integrating datasets...
+2025-03-13 10:21:44,119 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 10:21:44,120 - INFO - Data is already normalized and log-transformed
+2025-03-13 10:21:44,142 - INFO - Applying BBKNN batch correction...
+2025-03-13 10:21:48,871 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 10:21:48,874 - INFO - Performing kNN classification with k=21...
+2025-03-13 10:21:48,876 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 10:21:49,725 - INFO - kNN classification completed
+2025-03-13 10:21:49,727 - INFO - Generating UMAP visualizations...
+2025-03-13 10:22:14,322 - INFO - UMAP visualizations completed
+2025-03-13 10:22:14,568 - INFO - Integration pipeline completed successfully
+2025-03-13 10:22:14,570 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 10:22:14,571 - INFO - Plotting UMAP...
+2025-03-13 10:47:23,319 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 10:47:23,352 - INFO - Performing kNN classification with k=42...
+2025-03-13 10:47:23,354 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 10:47:24,204 - INFO - kNN classification completed
+2025-03-13 10:47:24,206 - INFO - Generating UMAP visualizations...
+2025-03-13 10:47:50,967 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 10:47:50,969 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 10:47:50,970 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 10:47:50,972 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 10:47:50,973 - INFO - Loading data files...
+2025-03-13 10:47:51,395 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 10:47:53,122 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 10:47:53,128 - INFO - Number of shared genes: 1024
+2025-03-13 10:47:53,129 - INFO - Preprocessing datasets...
+2025-03-13 10:47:53,880 - INFO - Using 1024 shared genes
+2025-03-13 10:47:57,147 - INFO - Integrating datasets...
+2025-03-13 10:47:57,181 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 10:47:57,182 - INFO - Data is already normalized and log-transformed
+2025-03-13 10:47:57,204 - INFO - Applying BBKNN batch correction...
+2025-03-13 10:48:01,895 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 10:48:01,897 - INFO - Performing kNN classification with k=42...
+2025-03-13 10:48:01,899 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 10:48:02,781 - INFO - kNN classification completed
+2025-03-13 10:48:02,783 - INFO - Generating UMAP visualizations...
+2025-03-13 10:48:27,448 - INFO - UMAP visualizations completed
+2025-03-13 10:48:28,252 - INFO - Integration pipeline completed successfully
+2025-03-13 10:48:28,253 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 10:48:28,255 - INFO - Plotting UMAP...
+2025-03-13 11:00:01,110 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:00:01,110 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:00:01,112 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:00:01,112 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:00:01,113 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:00:01,113 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:00:01,114 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:00:01,114 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:00:01,115 - INFO - Loading data files...
+2025-03-13 11:00:01,115 - INFO - Loading data files...
+2025-03-13 11:00:01,365 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:00:01,365 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:00:03,083 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:00:03,083 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:00:03,089 - INFO - Number of shared genes: 1024
+2025-03-13 11:00:03,089 - INFO - Number of shared genes: 1024
+2025-03-13 11:00:03,095 - INFO - Preprocessing datasets...
+2025-03-13 11:00:03,095 - INFO - Preprocessing datasets...
+2025-03-13 11:00:03,844 - INFO - Using 1024 shared genes
+2025-03-13 11:00:03,844 - INFO - Using 1024 shared genes
+2025-03-13 11:00:07,082 - INFO - Integrating datasets...
+2025-03-13 11:00:07,082 - INFO - Integrating datasets...
+2025-03-13 11:00:07,116 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:00:07,116 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:00:07,117 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:00:07,117 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:00:07,139 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:00:07,139 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:00:07,314 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:00:07,314 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:00:07,315 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:00:07,315 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:00:07,317 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:00:07,317 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:00:08,121 - INFO - kNN classification completed
+2025-03-13 11:00:08,121 - INFO - kNN classification completed
+2025-03-13 11:00:08,123 - INFO - Generating UMAP visualizations...
+2025-03-13 11:00:08,123 - INFO - Generating UMAP visualizations...
+2025-03-13 11:26:47,011 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:26:47,019 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:26:47,020 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:26:47,021 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:26:47,023 - INFO - Loading data files...
+2025-03-13 11:26:47,613 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:26:49,565 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:26:49,571 - INFO - Number of shared genes: 1024
+2025-03-13 11:26:49,572 - INFO - Preprocessing datasets...
+2025-03-13 11:26:50,330 - INFO - Using 1024 shared genes
+2025-03-13 11:26:53,601 - INFO - Integrating datasets...
+2025-03-13 11:26:53,640 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:26:53,643 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:26:53,662 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:26:58,613 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:26:58,615 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:26:58,617 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:26:59,464 - INFO - kNN classification completed
+2025-03-13 11:26:59,783 - INFO - Integration pipeline completed successfully
+2025-03-13 11:26:59,785 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:26:59,786 - INFO - Plotting UMAP...
+2025-03-13 11:39:18,767 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:39:18,767 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:39:19,045 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:39:19,045 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:39:19,046 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:39:19,046 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:39:19,047 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:39:19,047 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:39:19,048 - INFO - Loading data files...
+2025-03-13 11:39:19,048 - INFO - Loading data files...
+2025-03-13 11:39:19,215 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:39:19,215 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:39:20,949 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:39:20,949 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:39:20,954 - INFO - Number of shared genes: 1024
+2025-03-13 11:39:20,954 - INFO - Number of shared genes: 1024
+2025-03-13 11:39:20,958 - INFO - Preprocessing datasets...
+2025-03-13 11:39:20,958 - INFO - Preprocessing datasets...
+2025-03-13 11:39:21,694 - INFO - Using 1024 shared genes
+2025-03-13 11:39:21,694 - INFO - Using 1024 shared genes
+2025-03-13 11:39:24,888 - INFO - Integrating datasets...
+2025-03-13 11:39:24,888 - INFO - Integrating datasets...
+2025-03-13 11:39:24,918 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:39:24,918 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:39:24,919 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:39:24,919 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:39:24,937 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:39:24,937 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:39:25,583 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:39:25,583 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:39:25,585 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:39:25,585 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:39:25,587 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:39:25,587 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:39:26,395 - INFO - kNN classification completed
+2025-03-13 11:39:26,395 - INFO - kNN classification completed
+2025-03-13 11:39:26,814 - INFO - Integration pipeline completed successfully
+2025-03-13 11:39:26,814 - INFO - Integration pipeline completed successfully
+2025-03-13 11:39:26,816 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:39:26,816 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:39:26,817 - INFO - Plotting UMAP...
+2025-03-13 11:39:26,817 - INFO - Plotting UMAP...
+2025-03-13 11:39:57,599 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:39:57,599 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:39:57,599 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:39:57,601 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:39:57,601 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:39:57,601 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:39:57,602 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:39:57,602 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:39:57,602 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:39:57,604 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:39:57,604 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:39:57,604 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:39:57,606 - INFO - Loading data files...
+2025-03-13 11:39:57,606 - INFO - Loading data files...
+2025-03-13 11:39:57,606 - INFO - Loading data files...
+2025-03-13 11:39:57,776 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:39:57,776 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:39:57,776 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:39:58,841 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:39:58,841 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:39:58,841 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:39:58,847 - INFO - Number of shared genes: 1024
+2025-03-13 11:39:58,847 - INFO - Number of shared genes: 1024
+2025-03-13 11:39:58,847 - INFO - Number of shared genes: 1024
+2025-03-13 11:39:58,849 - INFO - Preprocessing datasets...
+2025-03-13 11:39:58,849 - INFO - Preprocessing datasets...
+2025-03-13 11:39:58,849 - INFO - Preprocessing datasets...
+2025-03-13 11:39:59,592 - INFO - Using 1024 shared genes
+2025-03-13 11:39:59,592 - INFO - Using 1024 shared genes
+2025-03-13 11:39:59,592 - INFO - Using 1024 shared genes
+2025-03-13 11:40:02,722 - INFO - Integrating datasets...
+2025-03-13 11:40:02,722 - INFO - Integrating datasets...
+2025-03-13 11:40:02,722 - INFO - Integrating datasets...
+2025-03-13 11:40:02,755 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:40:02,755 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:40:02,755 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:40:02,756 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:40:02,756 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:40:02,756 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:40:02,780 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:40:02,780 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:40:02,780 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:40:02,978 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:40:02,978 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:40:02,978 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:40:02,981 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:40:02,981 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:40:02,981 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:40:02,983 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:40:02,983 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:40:02,983 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:40:03,778 - INFO - kNN classification completed
+2025-03-13 11:40:03,778 - INFO - kNN classification completed
+2025-03-13 11:40:03,778 - INFO - kNN classification completed
+2025-03-13 11:40:04,483 - INFO - Integration pipeline completed successfully
+2025-03-13 11:40:04,483 - INFO - Integration pipeline completed successfully
+2025-03-13 11:40:04,483 - INFO - Integration pipeline completed successfully
+2025-03-13 11:40:04,485 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:40:04,485 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:40:04,485 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:40:04,486 - INFO - Plotting UMAP...
+2025-03-13 11:40:04,486 - INFO - Plotting UMAP...
+2025-03-13 11:40:04,486 - INFO - Plotting UMAP...
+2025-03-13 11:44:41,583 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:44:41,583 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:44:41,583 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:44:41,583 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:44:41,585 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:44:41,585 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:44:41,585 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:44:41,585 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:44:41,586 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:44:41,586 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:44:41,586 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:44:41,586 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:44:41,588 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:44:41,588 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:44:41,588 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:44:41,588 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:44:41,590 - INFO - Loading data files...
+2025-03-13 11:44:41,590 - INFO - Loading data files...
+2025-03-13 11:44:41,590 - INFO - Loading data files...
+2025-03-13 11:44:41,590 - INFO - Loading data files...
+2025-03-13 11:44:41,732 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:44:41,732 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:44:41,732 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:44:41,732 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:44:42,875 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:44:42,875 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:44:42,875 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:44:42,875 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:44:42,880 - INFO - Number of shared genes: 1024
+2025-03-13 11:44:42,880 - INFO - Number of shared genes: 1024
+2025-03-13 11:44:42,880 - INFO - Number of shared genes: 1024
+2025-03-13 11:44:42,880 - INFO - Number of shared genes: 1024
+2025-03-13 11:44:42,884 - INFO - Preprocessing datasets...
+2025-03-13 11:44:42,884 - INFO - Preprocessing datasets...
+2025-03-13 11:44:42,884 - INFO - Preprocessing datasets...
+2025-03-13 11:44:42,884 - INFO - Preprocessing datasets...
+2025-03-13 11:44:43,624 - INFO - Using 1024 shared genes
+2025-03-13 11:44:43,624 - INFO - Using 1024 shared genes
+2025-03-13 11:44:43,624 - INFO - Using 1024 shared genes
+2025-03-13 11:44:43,624 - INFO - Using 1024 shared genes
+2025-03-13 11:44:46,755 - INFO - Integrating datasets...
+2025-03-13 11:44:46,755 - INFO - Integrating datasets...
+2025-03-13 11:44:46,755 - INFO - Integrating datasets...
+2025-03-13 11:44:46,755 - INFO - Integrating datasets...
+2025-03-13 11:44:46,785 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:44:46,785 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:44:46,785 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:44:46,785 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:44:46,786 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:44:46,786 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:44:46,786 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:44:46,786 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:44:46,801 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:44:46,801 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:44:46,801 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:44:46,801 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:44:46,983 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:44:46,983 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:44:46,983 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:44:46,983 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:44:46,985 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:44:46,985 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:44:46,985 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:44:46,985 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:44:46,987 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:44:46,987 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:44:46,987 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:44:46,987 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:44:47,797 - INFO - kNN classification completed
+2025-03-13 11:44:47,797 - INFO - kNN classification completed
+2025-03-13 11:44:47,797 - INFO - kNN classification completed
+2025-03-13 11:44:47,797 - INFO - kNN classification completed
+2025-03-13 11:44:48,007 - INFO - Integration pipeline completed successfully
+2025-03-13 11:44:48,007 - INFO - Integration pipeline completed successfully
+2025-03-13 11:44:48,007 - INFO - Integration pipeline completed successfully
+2025-03-13 11:44:48,007 - INFO - Integration pipeline completed successfully
+2025-03-13 11:44:48,008 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:44:48,008 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:44:48,008 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:44:48,008 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:44:48,010 - INFO - Plotting UMAP...
+2025-03-13 11:44:48,010 - INFO - Plotting UMAP...
+2025-03-13 11:44:48,010 - INFO - Plotting UMAP...
+2025-03-13 11:44:48,010 - INFO - Plotting UMAP...
+2025-03-13 11:46:33,567 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:46:33,567 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:46:33,567 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:46:33,567 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:46:33,592 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:46:33,592 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:46:33,592 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:46:33,592 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:46:33,594 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:46:33,594 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:46:33,594 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:46:33,594 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:46:33,595 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:46:33,595 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:46:33,595 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:46:33,595 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:46:33,597 - INFO - Loading data files...
+2025-03-13 11:46:33,597 - INFO - Loading data files...
+2025-03-13 11:46:33,597 - INFO - Loading data files...
+2025-03-13 11:46:33,597 - INFO - Loading data files...
+2025-03-13 11:46:33,734 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:46:33,734 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:46:33,734 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:46:33,734 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:46:34,814 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:46:34,814 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:46:34,814 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:46:34,814 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:46:34,819 - INFO - Number of shared genes: 1024
+2025-03-13 11:46:34,819 - INFO - Number of shared genes: 1024
+2025-03-13 11:46:34,819 - INFO - Number of shared genes: 1024
+2025-03-13 11:46:34,819 - INFO - Number of shared genes: 1024
+2025-03-13 11:46:34,821 - INFO - Preprocessing datasets...
+2025-03-13 11:46:34,821 - INFO - Preprocessing datasets...
+2025-03-13 11:46:34,821 - INFO - Preprocessing datasets...
+2025-03-13 11:46:34,821 - INFO - Preprocessing datasets...
+2025-03-13 11:46:35,552 - INFO - Using 1024 shared genes
+2025-03-13 11:46:35,552 - INFO - Using 1024 shared genes
+2025-03-13 11:46:35,552 - INFO - Using 1024 shared genes
+2025-03-13 11:46:35,552 - INFO - Using 1024 shared genes
+2025-03-13 11:49:51,843 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:49:51,843 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:49:51,843 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:49:51,843 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:49:51,843 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:49:51,845 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:49:51,845 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:49:51,845 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:49:51,845 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:49:51,845 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:49:51,846 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:49:51,846 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:49:51,846 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:49:51,846 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:49:51,846 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:49:51,848 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:49:51,848 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:49:51,848 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:49:51,848 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:49:51,848 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:49:51,850 - INFO - Loading data files...
+2025-03-13 11:49:51,850 - INFO - Loading data files...
+2025-03-13 11:49:51,850 - INFO - Loading data files...
+2025-03-13 11:49:51,850 - INFO - Loading data files...
+2025-03-13 11:49:51,850 - INFO - Loading data files...
+2025-03-13 11:49:52,406 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:49:52,406 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:49:52,406 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:49:52,406 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:49:52,406 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:49:53,687 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:49:53,687 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:49:53,687 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:49:53,687 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:49:53,687 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:49:53,693 - INFO - Number of shared genes: 1024
+2025-03-13 11:49:53,693 - INFO - Number of shared genes: 1024
+2025-03-13 11:49:53,693 - INFO - Number of shared genes: 1024
+2025-03-13 11:49:53,693 - INFO - Number of shared genes: 1024
+2025-03-13 11:49:53,693 - INFO - Number of shared genes: 1024
+2025-03-13 11:49:53,696 - INFO - Preprocessing datasets...
+2025-03-13 11:49:53,696 - INFO - Preprocessing datasets...
+2025-03-13 11:49:53,696 - INFO - Preprocessing datasets...
+2025-03-13 11:49:53,696 - INFO - Preprocessing datasets...
+2025-03-13 11:49:53,696 - INFO - Preprocessing datasets...
+2025-03-13 11:49:54,432 - INFO - Using 1024 shared genes
+2025-03-13 11:49:54,432 - INFO - Using 1024 shared genes
+2025-03-13 11:49:54,432 - INFO - Using 1024 shared genes
+2025-03-13 11:49:54,432 - INFO - Using 1024 shared genes
+2025-03-13 11:49:54,432 - INFO - Using 1024 shared genes
+2025-03-13 11:49:57,469 - INFO - Integrating datasets...
+2025-03-13 11:49:57,469 - INFO - Integrating datasets...
+2025-03-13 11:49:57,469 - INFO - Integrating datasets...
+2025-03-13 11:49:57,469 - INFO - Integrating datasets...
+2025-03-13 11:49:57,469 - INFO - Integrating datasets...
+2025-03-13 11:49:57,503 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:49:57,503 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:49:57,503 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:49:57,503 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:49:57,503 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:49:57,505 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:49:57,505 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:49:57,505 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:49:57,505 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:49:57,505 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:49:57,526 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:49:57,526 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:49:57,526 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:49:57,526 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:49:57,526 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:50:06,668 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:50:06,668 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:50:06,668 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:50:06,668 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:50:06,668 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:50:06,671 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:50:06,671 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:50:06,671 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:50:06,671 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:50:06,671 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:50:06,673 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:50:06,673 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:50:06,673 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:50:06,673 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:50:06,673 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:50:07,508 - INFO - kNN classification completed
+2025-03-13 11:50:07,508 - INFO - kNN classification completed
+2025-03-13 11:50:07,508 - INFO - kNN classification completed
+2025-03-13 11:50:07,508 - INFO - kNN classification completed
+2025-03-13 11:50:07,508 - INFO - kNN classification completed
+2025-03-13 11:50:07,706 - INFO - Integration pipeline completed successfully
+2025-03-13 11:50:07,706 - INFO - Integration pipeline completed successfully
+2025-03-13 11:50:07,706 - INFO - Integration pipeline completed successfully
+2025-03-13 11:50:07,706 - INFO - Integration pipeline completed successfully
+2025-03-13 11:50:07,706 - INFO - Integration pipeline completed successfully
+2025-03-13 11:50:07,708 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:50:07,708 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:50:07,708 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:50:07,708 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:50:07,708 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:50:07,709 - INFO - Plotting UMAP...
+2025-03-13 11:50:07,709 - INFO - Plotting UMAP...
+2025-03-13 11:50:07,709 - INFO - Plotting UMAP...
+2025-03-13 11:50:07,709 - INFO - Plotting UMAP...
+2025-03-13 11:50:07,709 - INFO - Plotting UMAP...
+2025-03-13 11:51:35,022 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:51:35,023 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:51:35,024 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:51:35,025 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:51:35,027 - INFO - Loading data files...
+2025-03-13 11:51:35,591 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:51:37,096 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:51:37,101 - INFO - Number of shared genes: 1024
+2025-03-13 11:51:37,104 - INFO - Preprocessing datasets...
+2025-03-13 11:51:37,854 - INFO - Using 1024 shared genes
+2025-03-13 11:52:09,116 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:52:09,116 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:52:09,118 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:52:09,118 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:52:09,119 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:52:09,119 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:52:09,120 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:52:09,120 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:52:09,121 - INFO - Loading data files...
+2025-03-13 11:52:09,121 - INFO - Loading data files...
+2025-03-13 11:52:09,738 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:52:09,738 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:52:11,085 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:52:11,085 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:52:11,091 - INFO - Number of shared genes: 1024
+2025-03-13 11:52:11,091 - INFO - Number of shared genes: 1024
+2025-03-13 11:52:11,093 - INFO - Preprocessing datasets...
+2025-03-13 11:52:11,093 - INFO - Preprocessing datasets...
+2025-03-13 11:52:11,837 - INFO - Using 1024 shared genes
+2025-03-13 11:52:11,837 - INFO - Using 1024 shared genes
+2025-03-13 11:52:20,623 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:52:20,623 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:52:20,623 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:52:20,625 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:52:20,625 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:52:20,625 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:52:20,626 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:52:20,626 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:52:20,626 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-13 11:52:20,627 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:52:20,627 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:52:20,627 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:52:20,629 - INFO - Loading data files...
+2025-03-13 11:52:20,629 - INFO - Loading data files...
+2025-03-13 11:52:20,629 - INFO - Loading data files...
+2025-03-13 11:52:20,785 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:52:20,785 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:52:20,785 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:52:21,903 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:52:21,903 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:52:21,903 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-13 11:52:21,908 - INFO - Number of shared genes: 1024
+2025-03-13 11:52:21,908 - INFO - Number of shared genes: 1024
+2025-03-13 11:52:21,908 - INFO - Number of shared genes: 1024
+2025-03-13 11:52:21,910 - INFO - Preprocessing datasets...
+2025-03-13 11:52:21,910 - INFO - Preprocessing datasets...
+2025-03-13 11:52:21,910 - INFO - Preprocessing datasets...
+2025-03-13 11:52:22,650 - INFO - Using 1024 shared genes
+2025-03-13 11:52:22,650 - INFO - Using 1024 shared genes
+2025-03-13 11:52:22,650 - INFO - Using 1024 shared genes
+2025-03-13 11:52:26,207 - INFO - Concatenating 5 subsampled datasets
+2025-03-13 11:52:26,207 - INFO - Concatenating 5 subsampled datasets
+2025-03-13 11:52:26,207 - INFO - Concatenating 5 subsampled datasets
+2025-03-13 11:52:26,538 - INFO - Integrating datasets...
+2025-03-13 11:52:26,538 - INFO - Integrating datasets...
+2025-03-13 11:52:26,538 - INFO - Integrating datasets...
+2025-03-13 11:52:26,568 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:52:26,568 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:52:26,568 - INFO - Combined dataset shape: (1094, 1024)
+2025-03-13 11:52:26,570 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:52:26,570 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:52:26,570 - INFO - Data is already normalized and log-transformed
+2025-03-13 11:52:26,583 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:52:26,583 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:52:26,583 - INFO - Applying BBKNN batch correction...
+2025-03-13 11:52:40,891 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:52:40,891 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:52:40,891 - INFO - Automatically determined k = 21 (sqrt(n) = 32, 10% of smallest class = 21)
+2025-03-13 11:52:40,893 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:52:40,893 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:52:40,893 - INFO - Performing kNN classification with k=21...
+2025-03-13 11:52:40,895 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:52:40,895 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:52:40,895 - INFO - Reference cells: 1070, Bulk samples: 24
+2025-03-13 11:52:41,784 - INFO - kNN classification completed
+2025-03-13 11:52:41,784 - INFO - kNN classification completed
+2025-03-13 11:52:41,784 - INFO - kNN classification completed
+2025-03-13 11:52:41,921 - INFO - Integration pipeline completed successfully
+2025-03-13 11:52:41,921 - INFO - Integration pipeline completed successfully
+2025-03-13 11:52:41,921 - INFO - Integration pipeline completed successfully
+2025-03-13 11:52:41,923 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:52:41,923 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:52:41,923 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas
+2025-03-13 11:52:41,924 - INFO - Plotting UMAP...
+2025-03-13 11:52:41,924 - INFO - Plotting UMAP...
+2025-03-13 11:52:41,924 - INFO - Plotting UMAP...

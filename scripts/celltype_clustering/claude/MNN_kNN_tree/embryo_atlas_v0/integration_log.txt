@@ -1,0 +1,98 @@
+2025-03-11 16:12:49,807 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-11 16:12:49,810 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-11 16:12:49,812 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/embryo_adata_dense.h5ad
+2025-03-11 16:12:49,813 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/embryo_atlas
+2025-03-11 16:12:49,815 - INFO - Loading data files...
+2025-03-11 16:12:49,962 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-11 16:17:17,758 - INFO - Reference dataset loaded: (502680, 23932) (cells × genes)
+2025-03-11 16:17:17,783 - INFO - Number of shared genes: 10618
+2025-03-11 16:17:17,788 - INFO - Preprocessing datasets...
+2025-03-11 16:25:58,094 - INFO - Using 10618 shared genes
+2025-03-11 17:12:12,283 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-11 17:12:12,283 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-11 17:12:12,297 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-11 17:12:12,297 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-11 17:12:12,298 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/embryo_adata_dense.h5ad
+2025-03-11 17:12:12,298 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/embryo_adata_dense.h5ad
+2025-03-11 17:12:12,300 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/embryo_atlas
+2025-03-11 17:12:12,300 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/embryo_atlas
+2025-03-11 17:12:12,302 - INFO - Loading data files...
+2025-03-11 17:12:12,302 - INFO - Loading data files...
+2025-03-11 17:12:12,475 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-11 17:12:12,475 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-11 17:15:02,718 - INFO - Reference dataset loaded: (502680, 23932) (cells × genes)
+2025-03-11 17:15:02,718 - INFO - Reference dataset loaded: (502680, 23932) (cells × genes)
+2025-03-11 17:15:02,741 - INFO - Number of shared genes: 10618
+2025-03-11 17:15:02,741 - INFO - Number of shared genes: 10618
+2025-03-11 17:15:02,743 - INFO - Preprocessing datasets...
+2025-03-11 17:15:02,743 - INFO - Preprocessing datasets...
+2025-03-11 17:28:37,096 - INFO - Using 10618 shared genes
+2025-03-11 17:28:37,096 - INFO - Using 10618 shared genes
+2025-03-11 17:57:52,635 - INFO - Integrating datasets...
+2025-03-11 17:57:52,635 - INFO - Integrating datasets...
+2025-03-11 17:59:25,088 - INFO - Combined dataset shape: (502704, 10618)
+2025-03-11 17:59:25,088 - INFO - Combined dataset shape: (502704, 10618)
+2025-03-11 17:59:25,121 - INFO - Data is already normalized and log-transformed
+2025-03-11 17:59:25,121 - INFO - Data is already normalized and log-transformed
+2025-03-11 18:04:29,865 - INFO - Applying MNN batch correction...
+2025-03-11 18:04:29,865 - INFO - Applying MNN batch correction...
+2025-03-11 18:04:30,236 - INFO - MNN batch correction completed
+2025-03-11 18:04:30,236 - INFO - MNN batch correction completed
+2025-03-11 18:04:30,285 - INFO - Performing kNN classification with k=20...
+2025-03-11 18:04:30,285 - INFO - Performing kNN classification with k=20...
+2025-03-11 18:04:30,424 - INFO - Reference cells: 502680, Bulk samples: 24
+2025-03-11 18:04:30,424 - INFO - Reference cells: 502680, Bulk samples: 24
+2025-03-11 18:38:17,736 - INFO - kNN classification completed
+2025-03-11 18:38:17,736 - INFO - kNN classification completed
+2025-03-11 18:38:19,441 - INFO - Generating UMAP visualizations...
+2025-03-11 18:38:19,441 - INFO - Generating UMAP visualizations...
+2025-03-12 17:31:23,736 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-12 17:31:23,744 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-12 17:31:23,745 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/embryo_adata_dense.h5ad
+2025-03-12 17:31:23,747 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/embryo_atlas
+2025-03-12 17:31:23,748 - INFO - Loading data files...
+2025-03-12 17:31:23,946 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-12 17:34:45,399 - INFO - Reference dataset loaded: (502680, 23932) (cells × genes)
+2025-03-12 17:34:45,418 - INFO - Number of shared genes: 10618
+2025-03-12 17:34:45,419 - INFO - Preprocessing datasets...
+2025-03-12 17:36:30,798 - INFO - Using 10618 shared genes
+2025-03-12 17:41:39,286 - INFO - Integrating datasets...
+2025-03-12 17:43:42,480 - INFO - Combined dataset shape: (502704, 10618)
+2025-03-12 17:43:42,531 - INFO - Data is already normalized and log-transformed
+2025-03-12 17:47:24,015 - INFO - Applying MNN batch correction...
+2025-03-12 17:47:24,023 - INFO - MNN batch correction completed
+2025-03-12 17:47:24,062 - INFO - Performing kNN classification with k=20...
+2025-03-12 17:47:24,194 - INFO - Reference cells: 502680, Bulk samples: 24
+2025-03-12 18:10:26,373 - INFO - kNN classification completed
+2025-03-12 18:10:26,672 - INFO - Generating UMAP visualizations...
+2025-03-12 19:17:59,444 - INFO - UMAP visualizations completed
+2025-03-12 19:19:03,706 - INFO - Integration pipeline completed successfully
+2025-03-12 19:19:03,708 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/embryo_atlas
+2025-03-13 11:11:47,745 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:11:47,755 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:11:47,755 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/embryo_adata_dense.h5ad
+2025-03-13 11:11:47,755 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/embryo_atlas
+2025-03-13 11:11:47,755 - INFO - Loading data files...
+2025-03-13 11:11:47,846 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:14:28,531 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:14:28,546 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:14:28,546 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/embryo_adata_dense.h5ad
+2025-03-13 11:14:28,546 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/embryo_atlas
+2025-03-13 11:14:28,546 - INFO - Loading data files...
+2025-03-13 11:14:28,704 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:20:12,359 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:20:12,418 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:20:12,418 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/embryo_adata_dense.h5ad
+2025-03-13 11:20:12,418 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/embryo_atlas
+2025-03-13 11:20:12,418 - INFO - Loading data files...
+2025-03-13 11:20:12,797 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:39:40,482 - INFO - Memory limit set to: 2024.0 GB
+2025-03-13 11:39:40,545 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 11:39:40,545 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 11:39:40,545 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/embryo_adata_dense.h5ad
+2025-03-13 11:39:40,545 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/embryo_atlas
+2025-03-13 11:39:40,545 - INFO - Loading data files...
+2025-03-13 11:39:41,002 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 11:39:46,114 - INFO - Reference dataset loaded in backed mode: (502680, 23932) (cells × genes)
+2025-03-13 11:39:46,179 - INFO - Number of shared genes: 10618
+2025-03-13 11:39:46,179 - INFO - Reloading reference data with only shared genes...

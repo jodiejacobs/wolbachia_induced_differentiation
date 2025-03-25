@@ -1,0 +1,11 @@
+# How to fix when I upload too large of files:
+# Remove everything from the Git index
+git rm -r --cached .
+
+# Add back only the files you want to keep
+git add .
+git add --renormalize .
+git commit -m "Fresh start"
+
+# Force push to remote
+git push -f origin main

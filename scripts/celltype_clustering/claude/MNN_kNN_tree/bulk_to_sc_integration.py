@@ -1,18 +1,808 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# import scanpy as sc
+# import scanpy.external as sce
+# import pandas as pd
+# import numpy as np
+# import matplotlib.pyplot as plt
+# import os
+# import anndata as ad
+# from scipy import sparse
+# from scipy.spatial import cKDTree
+# from scipy.stats import percentileofscore
+# import warnings
+# import logging
+# import sys
+# import bbknn
+# import resource
+# import gc  # Add garbage collection
 
-"""
-Scanpy Bulk to Single-cell Integration with kNN Classification
-==============================================================
+# # Configure logging
+# logging.basicConfig(
+#     level=logging.INFO,
+#     format='%(asctime)s - %(levelname)s - %(message)s',
+#     datefmt='%Y-%m-%d %H:%M:%S'
+# )
+# logger = logging.getLogger(__name__)
 
-This script integrates bulk RNA-seq data with a single-cell reference dataset 
-using MNN batch correction and kNN classification to transfer cell type labels.
-It assumes both datasets are already normalized to 1e4 and log1p transformed.
+# # Suppress specific warnings
+# warnings.filterwarnings("ignore", category=FutureWarning)
+# sc.settings.verbosity = 1
 
-Usage:
-    python bulk_to_sc_integration.py --bulk_path BULK_H5AD --ref_path REF_H5AD --output_dir OUTPUT_DIR
 
-"""
+# bulk_path='/private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad'
+# ref_path='/private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad'
+# output_dir='/private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas_v2'
+# annotation_key='subclustering'
+# k_neighbors=None
+# num_permutations=1000
+# seed=42
+# mem = 4096  # Memory limit in GB    
+
+# # Color map to match final figures
+# color_dict={
+#     'JW18DOX':'#87de87', # green
+#     'JW18wMel':'#00aa44',  # dark green
+#     'S2DOX':'#ffb380', # orange
+#     'S2wMel':'#d45500' # dark orange
+
+# }
+
+# """Set up output directory and plotting parameters."""
+# np.random.seed(seed)
+
+# # Create output directories
+# os.makedirs(output_dir, exist_ok=True)
+# plots_dir = os.path.join(output_dir, 'plots')
+# os.makedirs(plots_dir, exist_ok=True)
+
+# # Set up log file
+# log_file = os.path.join(output_dir, 'integration_log.txt')
+# file_handler = logging.FileHandler(log_file)
+# file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+# logger.addHandler(file_handler)
+
+# # Set scanpy settings
+# sc.settings.figdir = plots_dir
+# sc.settings.set_figure_params(dpi=300, frameon=False, figsize=(10, 8), facecolor='white')
+
+# # Set memory limit
+# mem_limit = mem * 1024 * 1024 * 1024  # Convert GB to bytes
+# try:
+#     resource.setrlimit(resource.RLIMIT_AS, (mem_limit, mem_limit))
+# except ValueError as e:
+#     print(f"Error setting memory limit: {e}")
+
+# logger.info(f"Memory limit set to: {mem_limit / (1024 ** 3)} GB")
+
+# sc.settings.verbosity = 0  
+# sc.settings.set_figure_params(dpi=600, frameon=False, facecolor='white', format='pdf', vector_friendly=True)
+
+
+# def subsample_celltypes(adata, annotation_key, max_cells_per_type=1000):
+#     """Subsample cell types to ensure even representation with a max cap."""
+#     # Get the cell type counts
+#     celltype_counts = adata.obs[annotation_key].value_counts()
+
+#     # Get the minimum cell type count, but cap at max_cells_per_type
+#     min_count = min(celltype_counts.min(), max_cells_per_type)
+
+#     # Create a list to store the subsampled AnnData objects
+#     subsampled_adatas = []
+
+#     # Iterate over each cell type
+#     for celltype in celltype_counts.index:
+#         # Get the indices for the current cell type
+#         celltype_indices = adata.obs[annotation_key] == celltype
+#         celltype_idx = np.where(celltype_indices)[0]
+        
+#         # Determine sample size (minimum of actual count or min_count)
+#         sample_size = min(len(celltype_idx), min_count)
+        
+#         # Subsample the current cell type
+#         if len(celltype_idx) > sample_size:
+#             chosen_idx = np.random.choice(celltype_idx, sample_size, replace=False)
+#             subset_idx = np.zeros(adata.shape[0], dtype=bool)
+#             subset_idx[chosen_idx] = True
+#             subsampled_adata = adata[subset_idx].copy()
+#         else:
+#             subsampled_adata = adata[celltype_indices].copy()
+            
+#         # Append the subsampled AnnData object to the list
+#         subsampled_adatas.append(subsampled_adata)
+        
+#         # Force garbage collection
+#         gc.collect()
+
+#     # Concatenate the subsampled AnnData objects
+#     logger.info(f"Concatenating {len(subsampled_adatas)} subsampled datasets")
+#     subsampled_adata = ad.concat(subsampled_adatas, join='inner', index_unique='-')
+    
+#     # Clean up to free memory
+#     del subsampled_adatas
+#     gc.collect()
+
+#     return subsampled_adata
+    
+# def load_and_validate_data(bulk_path, ref_path):
+#     """Load and validate input AnnData objects."""
+#     logger.info("Loading data files...")
+    
+#     # Load bulk data (should be small)
+#     try:
+#         bulk_adata = sc.read_h5ad(bulk_path)
+#         logger.info(f"Bulk dataset loaded: {bulk_adata.shape} (samples × genes)")
+#     except Exception as e:
+#         logger.error(f"Error loading bulk data: {e}")
+#         raise
+    
+#     # Load reference data with backed mode to save memory
+#     try:
+#         # First check metadata only
+#         ref_adata = sc.read_h5ad(ref_path, backed='r')
+#         logger.info(f"Reference dataset loaded in backed mode: {ref_adata.shape} (cells × genes)")
+        
+#         # Extract var_names for gene matching
+#         ref_var_names = ref_adata.var_names.copy()
+        
+#         # Get shared genes first
+#         shared_genes = bulk_adata.var_names.intersection(ref_var_names)
+#         if len(shared_genes) == 0:
+#             logger.error("No shared genes between bulk and reference datasets!")
+#             raise ValueError("No shared genes between datasets")
+#         else:
+#             logger.info(f"Number of shared genes: {len(shared_genes)}")
+        
+#         # Now reload with only the shared genes to save memory
+#         logger.info("Reloading reference data with only shared genes...")
+#         ref_adata = sc.read_h5ad(ref_path, backed='r')
+#         ref_adata = ref_adata[:, shared_genes].to_memory()
+#         logger.info(f"Reference dataset loaded with shared genes only: {ref_adata.shape}")
+        
+#     except Exception as e:
+#         logger.error(f"Error loading reference data: {e}")
+#         raise
+    
+#     # Ensure unique gene names
+#     bulk_adata.var_names_make_unique()
+#     ref_adata.var_names_make_unique()
+    
+#     # Filter to shared genes for both datasets
+#     bulk_adata = bulk_adata[:, shared_genes].copy()
+    
+#     # Force garbage collection
+#     gc.collect()
+    
+#     return bulk_adata, ref_adata
+
+
+
+# def preprocess_data(bulk_adata, ref_adata, annotation_key):
+#     """Preprocess AnnData objects and prepare for integration."""
+#     logger.info("Preprocessing datasets...")
+    
+#     # Make copies to avoid modifying the originals
+#     bulk = bulk_adata.copy()
+#     ref = ref_adata.copy()
+    
+#     # Add dataset labels for batch correction
+#     bulk.obs["dataset"] = "bulk"
+#     ref.obs["dataset"] = "reference"
+    
+#     # Check if annotation key exists in reference data
+#     if annotation_key not in ref.obs.columns:
+#         logger.error(f"Annotation key '{annotation_key}' not found in reference data.")
+#         available_keys = list(ref.obs.columns)
+#         logger.error(f"Available keys: {available_keys}")
+#         raise KeyError(f"Annotation key '{annotation_key}' not found in reference data")
+    
+#     # Clear memory
+#     gc.collect()
+    
+#     return bulk, ref
+
+# def integrate_datasets(bulk_adata, ref_adata, n_pcs=30):
+#     """Integrate bulk and single-cell datasets using memory-efficient approach."""
+#     logger.info("Integrating datasets...")
+    
+#     # Concatenate datasets
+#     logger.info("Concatenating datasets...")
+#     combined = ad.concat([ref_adata, bulk_adata], join="inner", merge="first")
+#     logger.info(f"Combined dataset shape: {combined.shape}")
+    
+#     # Clean up input data to free memory
+#     del bulk_adata, ref_adata
+#     gc.collect()
+    
+#     # Since data is already normalized and log-transformed, we skip those steps
+#     logger.info("Data is already normalized and log-transformed")
+    
+#     # Ensure no NaN values that could cause issues
+#     logger.info("Checking for and handling NaN values...")
+#     if sparse.issparse(combined.X):
+#         # For sparse matrix, we can just work with non-zero elements
+#         if not isinstance(combined.X, sparse.csr_matrix):
+#             combined.X = combined.X.tocsr()
+        
+#         # Only fix non-zero elements with inf values (NaN values are stored as zeros in sparse)
+#         non_zero_mask = combined.X.data != 0
+#         inf_mask = ~np.isfinite(combined.X.data[non_zero_mask])
+#         if np.any(inf_mask):
+#             combined.X.data[non_zero_mask][inf_mask] = 0
+#     else:
+#         combined.X = np.nan_to_num(combined.X, nan=0, posinf=0, neginf=0)
+    
+#     # Apply BBKNN batch correction with memory-efficient settings
+#     logger.info("Applying BBKNN batch correction...")
+    
+#     # First compute PCA to reduce dimensions (saves memory)
+#     logger.info("Computing PCA...")
+#     sc.pp.pca(combined, n_comps=n_pcs, svd_solver='arpack', random_state=42)
+    
+#     # Perform batch correction with BBKNN (using precomputed PCA)
+#     logger.info("Running BBKNN...")
+#     bbknn.bbknn(combined, batch_key='dataset', n_pcs=n_pcs, neighbors_within_batch=5, use_faiss=True)
+
+#     # Force garbage collection
+#     gc.collect()
+    
+#     return combined
+
+# def compute_p_value(neighbor_labels, assigned_label, k, num_permutations=1000):
+#     """
+#     Compute p-value by shuffling labels and checking how often
+#     the assigned label appears by chance.
+#     """
+#     # Convert to numpy array for efficient operations
+#     neighbor_labels = np.array(neighbor_labels)
+#     simulated_counts = []
+    
+#     for _ in range(num_permutations):
+#         shuffled_labels = np.random.permutation(neighbor_labels)
+#         simulated_counts.append((shuffled_labels == assigned_label).sum() / k)
+    
+#     observed_prob = (neighbor_labels == assigned_label).sum() / k
+#     p_value = (100 - percentileofscore(simulated_counts, observed_prob)) / 100
+    
+#     return p_value
+
+
+# def determine_optimal_k(ref_adata, annotation_key):
+#     """Determine the optimal k value for kNN classification."""
+#     num_ref_cells = ref_adata.shape[0]
+    
+#     # Get the size of the smallest class
+#     try:
+#         min_class_size = ref_adata.obs[annotation_key].value_counts().min()
+#     except:
+#         logger.warning("Could not compute min class size, using default")
+#         min_class_size = 100
+    
+#     # Calculate potential k values:
+#     # 1. Square root of number of reference cells
+#     # 2. 10% of smallest class size
+#     k_sqrt = int(np.sqrt(num_ref_cells))
+#     k_10pct = int(min_class_size * 0.1)
+    
+#     # Use the smaller of the two values, but ensure k is at least 5
+#     k = max(5, min(k_sqrt, k_10pct))
+    
+#     logger.info(f"Automatically determined k = {k} (sqrt(n) = {k_sqrt}, 10% of smallest class = {k_10pct})")
+    
+#     return k
+
+# def kNN_classifier(combined_adata, ref_label_key, k, num_permutations=1000):
+#     """
+#     Classify bulk cells based on their k nearest neighbors in the reference dataset.
+#     Each bulk sample is processed independently.
+#     """
+#     logger.info(f"Performing kNN classification with k={k}...")
+    
+#     # Identify reference and bulk cells
+#     ref_indices = combined_adata.obs["dataset"] == "reference"
+#     bulk_indices = combined_adata.obs["dataset"] == "bulk"
+    
+#     # Get indices as arrays
+#     ref_idx = np.where(ref_indices)[0]
+#     bulk_idx = np.where(bulk_indices)[0]
+    
+#     logger.info(f"Reference cells: {len(ref_idx)}, Bulk samples: {len(bulk_idx)}")
+    
+#     # Process in batches to save memory
+#     batch_size = min(10, len(bulk_idx))  # Process at most 10 bulk samples at a time
+    
+#     results = []
+    
+#     # Extract labels once
+#     ref_labels = combined_adata.obs.loc[ref_indices, ref_label_key].values
+    
+#     # Use connectivities graph for neighbor search if available (from bbknn)
+#     if 'neighbors' in combined_adata.uns and 'connectivities' in combined_adata.uns['neighbors']:
+#         logger.info("Using precomputed connectivities for kNN search")
+#         connectivities = combined_adata.uns['neighbors']['connectivities']
+        
+#         # For each bulk sample
+#         for i, bulk_idx_i in enumerate(bulk_idx):
+#             # Get k nearest neighbors from connectivities graph
+#             if sparse.issparse(connectivities):
+#                 # Get the row corresponding to the current bulk sample
+#                 neighbors_row = connectivities[bulk_idx_i].toarray().flatten()
+#             else:
+#                 neighbors_row = connectivities[bulk_idx_i].flatten()
+            
+#             # Get indices of k highest values (excluding self-connection)
+#             neighbors_row[bulk_idx_i] = 0  # Set self-connection to 0
+#             neighbor_idx = np.argsort(neighbors_row)[-k:]
+            
+#             # Get distances (connectivity strengths)
+#             distances = neighbors_row[neighbor_idx]
+            
+#             # Filter to only reference neighbors
+#             ref_mask = np.isin(neighbor_idx, ref_idx)
+#             neighbor_idx = neighbor_idx[ref_mask]
+#             distances = distances[ref_mask]
+            
+#             # If not enough reference neighbors, get more
+#             if len(neighbor_idx) < k:
+#                 logger.warning(f"Only found {len(neighbor_idx)} reference neighbors for bulk sample {i}, using KDTree to find more")
+#                 # Fall back to KDTree for this sample (implemented in else branch below)
+#                 # This would require extracting embeddings, which may be memory-intensive
+#                 # For simplicity, we'll just use fewer neighbors for this sample
+#                 k_actual = len(neighbor_idx)
+#             else:
+#                 # Take only k neighbors
+#                 neighbor_idx = neighbor_idx[:k]
+#                 distances = distances[:k]
+#                 k_actual = k
+            
+#             # Get labels of k nearest neighbors for this bulk sample
+#             ref_indices_in_adata = np.where(ref_indices)[0]
+#             ref_positions = np.isin(ref_indices_in_adata, neighbor_idx)
+#             neighbor_labels = ref_labels[ref_positions]
+            
+#             # Determine the most frequent label (majority vote)
+#             unique_labels, counts = np.unique(neighbor_labels, return_counts=True)
+#             assigned_label = unique_labels[np.argmax(counts)]
+#             max_count = counts[np.argmax(counts)]
+            
+#             # Calculate confidence score (percentage of neighbors with the assigned label)
+#             confidence = max_count / k_actual
+            
+#             # Compute p-value with permutation test
+#             p_value = compute_p_value(neighbor_labels, assigned_label, k_actual, num_permutations)
+            
+#             # Store results
+#             results.append({
+#                 "Bulk_Sample": combined_adata.obs.index[bulk_idx_i],
+#                 "Predicted_Label": assigned_label,
+#                 "Confidence": confidence,
+#                 "P_value": p_value,
+#                 "Nearest_Neighbors": list(combined_adata.obs.index[neighbor_idx]),
+#                 "Neighbor_Labels": list(neighbor_labels),
+#                 "Neighbor_Distances": list(distances)
+#             })
+#     else:
+#         # Fallback to KDTree-based approach
+#         logger.info("Using KDTree for kNN search")
+        
+#         # Process in batches
+#         for batch_start in range(0, len(bulk_idx), batch_size):
+#             batch_end = min(batch_start + batch_size, len(bulk_idx))
+#             batch_bulk_idx = bulk_idx[batch_start:batch_end]
+            
+#             logger.info(f"Processing bulk samples {batch_start+1}-{batch_end} of {len(bulk_idx)}")
+            
+#             # Extract embeddings - try to use UMAP or PCA if available to save memory
+#             if 'X_umap' in combined_adata.obsm:
+#                 logger.info("Using UMAP embeddings for kNN search")
+#                 X_ref = combined_adata.obsm['X_umap'][ref_idx]
+#                 X_bulk_batch = combined_adata.obsm['X_umap'][batch_bulk_idx]
+#             elif 'X_pca' in combined_adata.obsm:
+#                 logger.info("Using PCA embeddings for kNN search")
+#                 X_ref = combined_adata.obsm['X_pca'][ref_idx]
+#                 X_bulk_batch = combined_adata.obsm['X_pca'][batch_bulk_idx]
+#             else:
+#                 # Fall back to using full gene expression (memory intensive)
+#                 logger.info("Using full gene expression for kNN search (may be memory intensive)")
+#                 if sparse.issparse(combined_adata.X):
+#                     X_ref = combined_adata.X[ref_idx].toarray()
+#                     X_bulk_batch = combined_adata.X[batch_bulk_idx].toarray()
+#                 else:
+#                     X_ref = combined_adata.X[ref_idx]
+#                     X_bulk_batch = combined_adata.X[batch_bulk_idx]
+            
+#             # Handle any NaNs or infs
+#             X_ref = np.nan_to_num(X_ref, nan=0, posinf=0, neginf=0)
+#             X_bulk_batch = np.nan_to_num(X_bulk_batch, nan=0, posinf=0, neginf=0)
+            
+#             # Build kd-tree for efficient nearest neighbor search
+#             tree = cKDTree(X_ref)
+            
+#             # Query KD-tree for all samples in the batch at once
+#             distances_batch, neighbor_idx_batch = tree.query(X_bulk_batch, k=k)
+            
+#             # Process each bulk sample in the batch
+#             for i, (distances, neighbor_idx) in enumerate(zip(distances_batch, neighbor_idx_batch)):
+#                 bulk_idx_i = batch_bulk_idx[i]
+                
+#                 # Get labels of k nearest neighbors for this bulk sample
+#                 neighbor_labels = ref_labels[neighbor_idx]
+                
+#                 # Determine the most frequent label (majority vote)
+#                 unique_labels, counts = np.unique(neighbor_labels, return_counts=True)
+#                 assigned_label = unique_labels[np.argmax(counts)]
+#                 max_count = counts[np.argmax(counts)]
+                
+#                 # Calculate confidence score (percentage of neighbors with the assigned label)
+#                 confidence = max_count / k
+                
+#                 # Compute p-value with permutation test
+#                 p_value = compute_p_value(neighbor_labels, assigned_label, k, num_permutations)
+                
+#                 # Store results
+#                 results.append({
+#                     "Bulk_Sample": combined_adata.obs.index[bulk_idx_i],
+#                     "Predicted_Label": assigned_label,
+#                     "Confidence": confidence,
+#                     "P_value": p_value,
+#                     "Nearest_Neighbors": list(combined_adata.obs.index[ref_idx[neighbor_idx]]),
+#                     "Neighbor_Labels": list(neighbor_labels),
+#                     "Neighbor_Distances": list(distances)
+#                 })
+            
+#             # Force garbage collection between batches
+#             gc.collect()
+    
+#     # Create results DataFrame
+#     results_df = pd.DataFrame(results)
+    
+#     # Add predicted labels to the combined dataset
+#     for result in results:
+#         sample_idx = result["Bulk_Sample"]
+#         label = result["Predicted_Label"]
+#         # Find position in the dataframe
+#         combined_adata.obs.loc[sample_idx, ref_label_key] = label
+    
+#     logger.info("kNN classification completed")
+#     return results_df, combined_adata
+
+
+# def visualize_integration(combined_adata, annotation_key, plots_dir):
+#     """Generate UMAP visualizations of the integrated data."""
+#     logger.info("Generating UMAP visualizations...")
+    
+#     # Compute PCA
+#     sc.pp.pca(combined_adata, svd_solver='arpack')
+    
+#     # Compute neighborhood graph
+#     sc.pp.neighbors(combined_adata, n_neighbors=15, n_pcs=30)
+    
+#     # Compute UMAP embedding
+#     sc.tl.umap(combined_adata)
+    
+#     # Save plots
+#     sc.pl.umap(combined_adata, color='dataset', title='Dataset (bulk vs reference)',
+#                save='_dataset.pdf')
+    
+#     sc.pl.umap(combined_adata, color=annotation_key, title=f'Cell Types ({annotation_key})',
+#                save=f'_{annotation_key}.pdf')
+    
+#     # Run leiden clustering
+#     sc.tl.leiden(combined_adata, resolution=0.8)
+#     sc.pl.umap(combined_adata, color='leiden', title='Leiden Clusters',
+#                save='_leiden.pdf')
+    
+#     # Create a custom plot highlighting bulk samples
+#     fig, ax = plt.subplots(figsize=(10, 8))
+    
+#     # Plot reference cells in gray
+#     ref_mask = combined_adata.obs['dataset'] == 'reference'
+#     ax.scatter(
+#         combined_adata.obsm['X_umap'][ref_mask, 0],
+#         combined_adata.obsm['X_umap'][ref_mask, 1],
+#         c='lightgray', s=5, alpha=0.5, label='Reference'
+#     )
+    
+#     # Plot bulk samples with distinct colors based on their predicted cell type
+#     bulk_mask = combined_adata.obs['dataset'] == 'bulk'
+#     bulk_cell_types = combined_adata.obs.loc[bulk_mask, annotation_key].astype('category')
+    
+#     for ct in bulk_cell_types.cat.categories:
+#         ct_mask = (combined_adata.obs['dataset'] == 'bulk') & (combined_adata.obs[annotation_key] == ct)
+#         ax.scatter(
+#             combined_adata.obsm['X_umap'][ct_mask, 0],
+#             combined_adata.obsm['X_umap'][ct_mask, 1],
+#             s=100, alpha=0.9, label=f'Bulk - {ct}'
+#         )
+    
+#     ax.set_title('UMAP - Bulk Samples Highlighted')
+#     ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+#     plt.tight_layout()
+#     plt.savefig(os.path.join(plots_dir, 'bulk_samples_highlighted.pdf'), bbox_inches='tight')
+#     plt.close()
+    
+#     logger.info("UMAP visualizations completed")
+    
+#     return combined_adata
+
+# def identify_marker_genes(adata, annotation):
+#     sc.tl.rank_genes_groups(adata, annotation, method='wilcoxon') #Find marker genes by tissue instead of by leiden clustering (done earlier)
+#     marker_genes = adata.uns['rank_genes_groups']['names']
+
+#     # Get the top N genes for each cluster
+#     n_top_genes = 5
+#     top_genes = pd.DataFrame(marker_genes).iloc[:n_top_genes]
+
+#     sc.pl.rank_genes_groups_dotplot(
+#         adata,
+#         groupby=annotation,  # Use tissue labels for grouping instead of 'leiden'
+#         n_genes=4,
+#         values_to_plot="logfoldchanges", cmap='bwr', #changed from 'viridis'  
+#         vmin=-4,
+#         vmax=4,
+#         min_logfoldchange=3,
+#         colorbar_title='log fold change'
+#     )
+#     plt.savefig('marker_genes_by_tissue.pdf')
+#     plt.close()
+
+# # Log start of processing
+# logger.info("Starting Scanpy bulk to single-cell integration pipeline")
+# logger.info(f"Bulk data: {bulk_path}")
+# logger.info(f"Reference data: {ref_path}")
+# logger.info(f"Output directory: {output_dir}")
+
+# # try:
+# # Load and validate data
+# bulk_adata, ref_adata = load_and_validate_data(bulk_path, ref_path)
+
+# # Preprocess data
+# bulk_processed, ref_processed = preprocess_data(bulk_adata, ref_adata, annotation_key)
+
+# # Sample even cell types across the reference
+# ref_processed=subsample_celltypes(ref_processed, annotation_key)
+
+# # Integrate datasets
+# combined_adata = integrate_datasets(bulk_processed, ref_processed)
+
+# # Determine optimal k if not provided
+# k = k_neighbors
+# if k is None:
+#     k = determine_optimal_k(ref_processed, annotation_key)
+
+# # Run kNN classification
+# results_df, annotated_adata = kNN_classifier(
+#     combined_adata,
+#     ref_label_key=annotation_key,
+#     k=k,
+#     num_permutations=num_permutations
+# )
+
+# # Generate visualizations
+# annotated_adata = visualize_integration(annotated_adata, annotation_key, plots_dir)
+
+# # Extract bulk annotations and save to files
+# bulk_samples = annotated_adata[annotated_adata.obs['dataset'] == 'bulk']
+# bulk_annotations = bulk_samples.obs[[annotation_key]]
+
+# # Save results
+# results_df.to_csv(os.path.join(output_dir, 'bulk_classification_results.csv'), index=False)
+# bulk_annotations.to_csv(os.path.join(output_dir, 'bulk_annotations.csv'))
+# annotated_adata.write_h5ad(os.path.join(output_dir, 'annotated_data.h5ad'))
+
+# logger.info("Integration pipeline completed successfully")
+# logger.info(f"Results saved to {output_dir}")
+
+# # Plot UMAP
+# logger.info("Plotting UMAP...")
+
+
+# # Plot Annotated UMAP:
+# sc.pl.umap(combined_adata, color=[annotation_key], show=False)
+
+# # Get the UMAP coordinates
+# umap_coords = combined_adata.obsm['X_umap']
+
+# # Get your sample labels from the data
+# labels = combined_adata.obs['Sample']
+
+# # Iterate over each point and add a label if it's not NA
+# for idx, label in enumerate(labels):
+#     if pd.notna(label):  # Check if the label is not NA
+
+#         plt.plot(umap_coords[idx, 0], umap_coords[idx, 1], 
+#                 color=color_dict[label[:-8]], 
+#                 marker='o',            # '*' for star marker
+#                 markersize=10,          # Increase size for better visibility
+#                 markeredgecolor='white', # White outline
+#                 markeredgewidth=0.25,   # Width of the outline
+#                 alpha=1)    # Remove background grid and ticks for a cleaner look
+# plt.grid(False)
+
+# # Adjust layout to fit the legend outside
+# plt.tight_layout(rect=[0, 0, 0.85, 1])  # Leaves space for legend on the right
+# plt.savefig(f'{output_dir}/combined_dataset_samples_and_tissue.pdf', dpi=600, bbox_inches="tight")
+# plt.show() 
+
+# plt.close()
+
+# def plot_enhanced_umap(combined_adata, annotation_key, plots_dir):
+#     """Generate enhanced UMAP visualizations that better show differences between groups."""
+#     # Create a figure with two subplots side by side
+#     fig, axes = plt.subplots(1, 2, figsize=(20, 8))
+    
+#     # Plot 1: Reference cells with bulk cells highlighted by sample group
+#     ax = axes[0]
+    
+#     # Plot reference cells in gray first
+#     ref_mask = combined_adata.obs['dataset'] == 'reference'
+#     ax.scatter(
+#         combined_adata.obsm['X_umap'][ref_mask, 0],
+#         combined_adata.obsm['X_umap'][ref_mask, 1],
+#         c='lightgray', s=5, alpha=0.3, label='Reference Cells'
+#     )
+    
+#     # Get sample groups (assuming Sample column format like "JW18DOX221117-1")
+#     bulk_mask = combined_adata.obs['dataset'] == 'bulk'
+#     sample_groups = []
+#     for sample_name in combined_adata.obs.loc[bulk_mask, 'Sample']:
+#         # Extract the prefix (e.g., "JW18DOX", "JW18wMel", "S2DOX", "S2wMel")
+#         if pd.notna(sample_name):
+#             prefix = sample_name.split('221117')[0]  # Remove date and number suffix
+#             sample_groups.append(prefix)
+#         else:
+#             sample_groups.append('Unknown')
+    
+#     # Add Sample group as a new column
+#     combined_adata.obs.loc[bulk_mask, 'SampleGroup'] = sample_groups
+    
+#     # Plot bulk samples with colors based on their sample group
+#     for group, color in color_dict.items():
+#         group_mask = (combined_adata.obs['dataset'] == 'bulk') & (combined_adata.obs['SampleGroup'] == group)
+#         ax.scatter(
+#             combined_adata.obsm['X_umap'][group_mask, 0],
+#             combined_adata.obsm['X_umap'][group_mask, 1],
+#             c=color, s=100, alpha=0.9, label=f'{group}',
+#             edgecolors='white', linewidths=0.5
+#         )
+    
+#     ax.set_title('UMAP - Samples Colored by Experimental Condition')
+#     ax.legend(loc='upper right')
+#     ax.grid(False)
+#     ax.set_xlabel('UMAP 1')
+#     ax.set_ylabel('UMAP 2')
+    
+#     # Plot 2: Reference cells colored by cell type, bulk samples as larger points
+#     ax = axes[1]
+    
+#     # Create a colormap for cell types
+#     cell_types = combined_adata.obs[annotation_key].cat.categories
+#     n_cell_types = len(cell_types)
+#     colors = plt.cm.tab20(np.linspace(0, 1, n_cell_types))
+    
+#     # Plot reference cells colored by cell type
+#     for i, cell_type in enumerate(cell_types):
+#         ct_mask = (combined_adata.obs['dataset'] == 'reference') & (combined_adata.obs[annotation_key] == cell_type)
+#         ax.scatter(
+#             combined_adata.obsm['X_umap'][ct_mask, 0],
+#             combined_adata.obsm['X_umap'][ct_mask, 1],
+#             c=[colors[i]], s=10, alpha=0.6, label=f'{cell_type}'
+#         )
+    
+#     # Plot bulk samples as larger points
+#     for i, cell_type in enumerate(cell_types):
+#         ct_mask = (combined_adata.obs['dataset'] == 'bulk') & (combined_adata.obs[annotation_key] == cell_type)
+#         ax.scatter(
+#             combined_adata.obsm['X_umap'][ct_mask, 0],
+#             combined_adata.obsm['X_umap'][ct_mask, 1],
+#             c=[colors[i]], s=150, alpha=1.0, edgecolors='black', linewidths=0.5
+#         )
+    
+#     ax.set_title(f'UMAP - Cell Types ({annotation_key})')
+#     ax.legend(loc='upper right')
+#     ax.grid(False)
+#     ax.set_xlabel('UMAP 1')
+#     ax.set_ylabel('UMAP 2')
+    
+#     plt.tight_layout()
+#     plt.savefig(os.path.join(plots_dir, 'enhanced_umap_visualization.pdf'), bbox_inches='tight', dpi=300)
+#     plt.close()
+    
+#     # Create a visualization to verify KNN classification results
+#     verify_knn_visualization(combined_adata, annotation_key, plots_dir)
+    
+#     return combined_adata
+
+# def verify_knn_visualization(combined_adata, annotation_key, plots_dir):
+#     """Create a visualization to verify KNN classification results for a few samples."""
+#     bulk_mask = combined_adata.obs['dataset'] == 'bulk'
+#     ref_mask = combined_adata.obs['dataset'] == 'reference'
+    
+#     # Get sample groups
+#     sample_groups = combined_adata.obs.loc[bulk_mask, 'SampleGroup'].unique()
+    
+#     # Select one sample from each group to visualize
+#     selected_samples = []
+#     for group in sample_groups:
+#         group_samples = combined_adata.obs.loc[bulk_mask & (combined_adata.obs['SampleGroup'] == group)].index
+#         if len(group_samples) > 0:
+#             selected_samples.append(group_samples[0])
+    
+#     # Create a figure with subplots for each selected sample
+#     fig, axes = plt.subplots(len(selected_samples), 1, figsize=(12, 6*len(selected_samples)))
+#     if len(selected_samples) == 1:
+#         axes = [axes]  # Make axes iterable if only one subplot
+    
+#     # For each selected sample
+#     for i, sample_id in enumerate(selected_samples):
+#         ax = axes[i]
+        
+#         # Get sample info
+#         sample_idx = combined_adata.obs.index.get_loc(sample_id)
+#         sample_group = combined_adata.obs.loc[sample_id, 'SampleGroup']
+#         predicted_label = combined_adata.obs.loc[sample_id, annotation_key]
+        
+#         # Plot all reference cells as background
+#         ax.scatter(
+#             combined_adata.obsm['X_umap'][ref_mask, 0],
+#             combined_adata.obsm['X_umap'][ref_mask, 1],
+#             c='lightgray', s=5, alpha=0.2
+#         )
+        
+#         # Plot cells of the predicted cell type
+#         pred_mask = ref_mask & (combined_adata.obs[annotation_key] == predicted_label)
+#         ax.scatter(
+#             combined_adata.obsm['X_umap'][pred_mask, 0],
+#             combined_adata.obsm['X_umap'][pred_mask, 1],
+#             c='blue', s=20, alpha=0.5, label=f'Reference {predicted_label} cells'
+#         )
+        
+#         # Plot the sample itself
+#         ax.scatter(
+#             combined_adata.obsm['X_umap'][sample_idx, 0],
+#             combined_adata.obsm['X_umap'][sample_idx, 1],
+#             c=color_dict[sample_group], s=200, alpha=1.0, 
+#             edgecolors='black', linewidths=1.0,
+#             label=f'{sample_id} ({sample_group})'
+#         )
+        
+#         # Get the K nearest neighbors for this sample from the results file
+#         # Note: This would need the results DataFrame to be passed as an argument
+#         # For visualization purposes, we'll just use the 10 nearest reference cells based on UMAP distance
+        
+#         # Calculate distances in UMAP space
+#         sample_umap = combined_adata.obsm['X_umap'][sample_idx]
+#         ref_umaps = combined_adata.obsm['X_umap'][ref_mask]
+        
+#         # Calculate Euclidean distances
+#         distances = np.sqrt(np.sum((ref_umaps - sample_umap)**2, axis=1))
+        
+#         # Get indices of 10 nearest neighbors
+#         nearest_indices = np.argsort(distances)[:10]
+#         nearest_indices = np.where(ref_mask)[0][nearest_indices]
+        
+#         # Plot nearest neighbors
+#         ax.scatter(
+#             combined_adata.obsm['X_umap'][nearest_indices, 0],
+#             combined_adata.obsm['X_umap'][nearest_indices, 1],
+#             c='red', s=80, alpha=0.7, 
+#             edgecolors='black', linewidths=0.5,
+#             marker='*', label='Nearest neighbors (UMAP space)'
+#         )
+        
+#         ax.set_title(f'Sample: {sample_id} - Group: {sample_group} - Predicted: {predicted_label}')
+#         ax.legend(loc='upper right')
+#         ax.grid(False)
+#         ax.set_xlabel('UMAP 1')
+#         ax.set_ylabel('UMAP 2')
+    
+#     plt.tight_layout()
+#     plt.savefig(os.path.join(plots_dir, 'knn_verification.pdf'), bbox_inches='tight', dpi=300)
+#     plt.close()
+
+# # Plot enhanced UMAP visualization
+# plot_enhanced_umap(combined_adata, annotation_key, plots_dir)
+
+# # Verify KNN classification results
+# verify_knn_visualization(combined_adata, annotation_key, plots_dir)
 
 import scanpy as sc
 import scanpy.external as sce
@@ -20,13 +810,16 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import os
-import argparse
 import anndata as ad
 from scipy import sparse
 from scipy.spatial import cKDTree
 from scipy.stats import percentileofscore
 import warnings
 import logging
+import sys
+import bbknn
+import resource
+import gc
 
 # Configure logging
 logging.basicConfig(
@@ -41,56 +834,83 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 sc.settings.verbosity = 1
 
 
-def parse_arguments():
-    """Parse command line arguments."""
-    parser = argparse.ArgumentParser(description="Scanpy Bulk to Single-cell Integration")
-    
-    parser.add_argument("--bulk_path", type=str, required=True,
-                        help="Path to the bulk RNA-seq AnnData file (h5ad)")
-    
-    parser.add_argument("--ref_path", type=str, required=True,
-                        help="Path to the reference single-cell AnnData file (h5ad)")
-    
-    parser.add_argument("--output_dir", type=str, required=True,
-                        help="Directory to save output files")
-    
-    parser.add_argument("--annotation_key", type=str, default="annotation",
-                        help="Key in the reference AnnData.obs containing cell type annotations")
-    
-    parser.add_argument("--k_neighbors", type=int, default=None,
-                        help="Number of neighbors for kNN classification (default: auto)")
-    
-    parser.add_argument("--num_permutations", type=int, default=1000,
-                        help="Number of permutations for p-value calculation")
-    
-    parser.add_argument("--seed", type=int, default=42,
-                        help="Random seed for reproducibility")
-    
-    return parser.parse_args()
+bulk_path='/private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad'
+ref_path='/private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad'
+output_dir='/private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/blood_atlas_v3'
+annotation_key='subclustering'
+k_neighbors=None
+num_permutations=1000
+seed=42
+mem = 1024
+
+# Color map to match final figures
+color_dict={
+    'JW18DOX':'#87de87', # green
+    'JW18wMel':'#00aa44',  # dark green
+    'S2DOX':'#ffb380', # orange
+    'S2wMel':'#d45500' # dark orange
+
+}
+
+"""Set up output directory and plotting parameters."""
+np.random.seed(seed)
+
+# Create output directories
+os.makedirs(output_dir, exist_ok=True)
+plots_dir = os.path.join(output_dir, 'plots')
+os.makedirs(plots_dir, exist_ok=True)
+
+# Set up log file
+log_file = os.path.join(output_dir, 'integration_log.txt')
+file_handler = logging.FileHandler(log_file)
+file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+logger.addHandler(file_handler)
+
+# Set scanpy settings
+sc.settings.figdir = plots_dir
+sc.settings.set_figure_params(dpi=300, frameon=False, figsize=(10, 8), facecolor='white')
+
+# Set memory limit
+mem_limit = mem * 1024 * 1024 * 1024  # Convert GB to bytes
+try:
+    resource.setrlimit(resource.RLIMIT_AS, (mem_limit, mem_limit))
+except ValueError as e:
+    print(f"Error setting memory limit: {e}")
+
+print(f"Memory limit set to: {mem_limit / (1024 ** 3)} GB")
+
+sc.settings.verbosity = 0  
+sc.settings.set_figure_params(dpi=600, frameon=False, facecolor='white', format='pdf', vector_friendly=True)
 
 
-def setup_environment(args):
-    """Set up output directory and plotting parameters."""
-    np.random.seed(args.seed)
-    
-    # Create output directories
-    os.makedirs(args.output_dir, exist_ok=True)
-    plots_dir = os.path.join(args.output_dir, 'plots')
-    os.makedirs(plots_dir, exist_ok=True)
-    
-    # Set up log file
-    log_file = os.path.join(args.output_dir, 'integration_log.txt')
-    file_handler = logging.FileHandler(log_file)
-    file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
-    logger.addHandler(file_handler)
-    
-    # Set scanpy settings
-    sc.settings.figdir = plots_dir
-    sc.settings.set_figure_params(dpi=300, frameon=False, figsize=(8, 8), facecolor='white')
-    
-    return plots_dir
+def subsample_celltypes(adata, annotation_key):
+    """Subsample cell types to ensure even representation."""
+    # Get the cell type counts
+    celltype_counts = adata.obs[annotation_key].value_counts()
 
+    # Get the minimum cell type count
+    min_count = celltype_counts.min()
 
+    # Create a list to store the subsampled AnnData objects
+    subsampled_adatas = []
+
+    # Iterate over each cell type
+    for celltype in celltype_counts.index:
+        # Get the indices for the current cell type
+        celltype_indices = adata.obs[annotation_key] == celltype
+
+        # Subsample the current cell type
+        subsampled_adata = adata[celltype_indices].copy()
+        subsampled_adata = subsampled_adata[np.random.choice(subsampled_adata.shape[0], min_count, replace=False)]
+
+        # Append the subsampled AnnData object to the list
+        subsampled_adatas.append(subsampled_adata)
+
+    # Concatenate the subsampled AnnData objects
+    subsampled_adata = ad.AnnData.concatenate(*subsampled_adatas, batch_key='subsampled', index_unique='-')
+
+    return subsampled_adata
+    
 def load_and_validate_data(bulk_path, ref_path):
     """Load and validate input AnnData objects."""
     logger.info("Loading data files...")
@@ -173,18 +993,14 @@ def integrate_datasets(bulk_adata, ref_adata):
     else:
         combined.X = np.nan_to_num(combined.X, nan=0, posinf=0, neginf=0)
     
-    # Apply batch correction using MNN
-    logger.info("Applying MNN batch correction...")
-    try:
-        corrected = sce.pp.mnn_correct(combined, batch_key="dataset", return_only_var_genes=False)
-        # MNN returns a tuple with the corrected AnnData as the first element
-        corrected_adata = corrected[0]
-        logger.info("MNN batch correction completed")
-        return corrected_adata
-    except Exception as e:
-        logger.error(f"MNN batch correction failed: {e}")
-        logger.warning("Continuing without batch correction")
-        return combined
+
+    # Apply BBKNN batch correction
+    logger.info("Applying BBKNN batch correction...")
+
+    # Perform batch correction with BBKNN
+    bbknn.bbknn(combined, batch_key='dataset')
+
+    return combined
 
 
 def compute_p_value(neighbor_labels, assigned_label, k, num_permutations=1000):
@@ -230,16 +1046,148 @@ def determine_optimal_k(ref_adata, annotation_key):
     
     return k
 
+# def kNN_classifier(combined_adata, ref_label_key, k, num_permutations=1000):
+#     """
+#     Classify bulk cells based on their k nearest neighbors in the reference dataset.
+#     Each bulk sample is processed independently.
+#     """
+#     logger.info(f"Performing kNN classification with k={k}...")
+    
+#     # Identify reference and bulk cells
+#     ref_indices = combined_adata.obs["dataset"] == "reference"
+#     bulk_indices = combined_adata.obs["dataset"] == "bulk"
+    
+#     # Get indices as arrays
+#     ref_idx = np.where(ref_indices)[0]
+#     bulk_idx = np.where(bulk_indices)[0]
+    
+#     logger.info(f"Reference cells: {len(ref_idx)}, Bulk samples: {len(bulk_idx)}")
+    
+#     # Extract data for classification
+#     try:
+#         # Handle sparse matrices if needed
+#         if sparse.issparse(combined_adata.X):
+#             X_ref = combined_adata.X[ref_idx].toarray()
+#             X_bulk = combined_adata.X[bulk_idx].toarray()
+#         else:
+#             X_ref = combined_adata.X[ref_idx]
+#             X_bulk = combined_adata.X[bulk_idx]
+        
+#         # Handle any NaNs or infs
+#         X_ref = np.nan_to_num(X_ref, nan=0, posinf=0, neginf=0)
+#         X_bulk = np.nan_to_num(X_bulk, nan=0, posinf=0, neginf=0)
+        
+#         # Get reference cell labels
+#         ref_labels = combined_adata.obs.loc[ref_indices, ref_label_key].values
+        
+#         # Build kd-tree for efficient nearest neighbor search
+#         tree = cKDTree(X_ref)
+        
+#         results = []
+        
+#         # Process each bulk sample INDEPENDENTLY
+#         for i, bulk_idx_i in enumerate(bulk_idx):
+#             # Get current bulk sample
+#             current_sample = X_bulk[i].reshape(1, -1)
+            
+#             # Query KD-tree for this specific sample
+#             distances, neighbor_idx = tree.query(current_sample, k=k)
+            
+#             # Convert from 2D to 1D arrays
+#             distances = distances[0]
+#             neighbor_idx = neighbor_idx[0]
+            
+#             # Get labels of k nearest neighbors for this bulk sample
+#             neighbor_labels = ref_labels[neighbor_idx]
+            
+#             # Determine the most frequent label (majority vote)
+#             unique_labels, counts = np.unique(neighbor_labels, return_counts=True)
+#             assigned_label = unique_labels[np.argmax(counts)]
+#             max_count = counts[np.argmax(counts)]
+            
+#             # Calculate confidence score (percentage of neighbors with the assigned label)
+#             confidence = max_count / k
+            
+#             # Compute p-value with permutation test
+#             p_value = compute_p_value(neighbor_labels, assigned_label, k, num_permutations)
+            
+#             # Store results
+#             results.append({
+#                 "Bulk_Sample": combined_adata.obs.index[bulk_idx_i],
+#                 "Predicted_Label": assigned_label,
+#                 "Confidence": confidence,
+#                 "P_value": p_value,
+#                 "Nearest_Neighbors": list(combined_adata.obs.index[ref_idx[neighbor_idx]]),
+#                 "Neighbor_Labels": list(neighbor_labels),
+#                 "Neighbor_Distances": list(distances)
+#             })
+        
+#         # Create results DataFrame
+#         results_df = pd.DataFrame(results)
+        
+#         # Add predicted labels to the combined dataset
+#         for i, idx in enumerate(bulk_idx):
+#             combined_adata.obs.loc[combined_adata.obs.index[idx], ref_label_key] = results_df.iloc[i]["Predicted_Label"]
+        
+#         logger.info("kNN classification completed")
+#         return results_df, combined_adata
+    
+#     except Exception as e:
+#         logger.error(f"kNN classification failed: {e}")
+#         import traceback
+#         logger.error(traceback.format_exc())
+#         raise
+
 
 def kNN_classifier(combined_adata, ref_label_key, k, num_permutations=1000):
     """
     Classify bulk cells based on their k nearest neighbors in the reference dataset.
+    Each bulk sample is processed independently and assigned a cell type based on its own nearest neighbors.
     """
     logger.info(f"Performing kNN classification with k={k}...")
+    
+    # Verify the annotation key exists and print the first few values
+    if ref_label_key not in combined_adata.obs.columns:
+        logger.error(f"Annotation key '{ref_label_key}' not found in combined data")
+        logger.error(f"Available columns: {list(combined_adata.obs.columns)}")
+        
+        # Try to find a suitable column as fallback
+        categorical_cols = [col for col in combined_adata.obs.columns 
+                          if combined_adata.obs[col].dtype.name == 'category' 
+                          or combined_adata.obs[col].dtype == 'object']
+        
+        cell_type_cols = [col for col in categorical_cols 
+                         if 'cell' in col.lower() or 'type' in col.lower() 
+                         or 'cluster' in col.lower()]
+        
+        if cell_type_cols:
+            fallback_key = cell_type_cols[0]
+            logger.warning(f"Using '{fallback_key}' as fallback annotation key")
+            ref_label_key = fallback_key
+        elif categorical_cols:
+            fallback_key = categorical_cols[0]
+            logger.warning(f"Using '{fallback_key}' as fallback annotation key")
+            ref_label_key = fallback_key
+        else:
+            raise KeyError(f"Annotation key '{ref_label_key}' not found and no alternative available")
+    
+    # Print some values from the annotation column to verify it's accessible
+    ref_mask = combined_adata.obs['dataset'] == 'reference'
+    sample_values = combined_adata.obs.loc[ref_mask, ref_label_key].iloc[:5].tolist()
+    logger.info(f"Sample values from '{ref_label_key}': {sample_values}")
     
     # Identify reference and bulk cells
     ref_indices = combined_adata.obs["dataset"] == "reference"
     bulk_indices = combined_adata.obs["dataset"] == "bulk"
+    
+    # Get cell type labels for the reference dataset
+    try:
+        ref_adata = combined_adata[ref_indices]
+        ref_labels = ref_adata.obs[ref_label_key].values
+        logger.info(f"Successfully extracted {len(ref_labels)} reference labels")
+    except Exception as e:
+        logger.error(f"Error extracting reference labels: {e}")
+        raise
     
     # Get indices as arrays
     ref_idx = np.where(ref_indices)[0]
@@ -247,69 +1195,100 @@ def kNN_classifier(combined_adata, ref_label_key, k, num_permutations=1000):
     
     logger.info(f"Reference cells: {len(ref_idx)}, Bulk samples: {len(bulk_idx)}")
     
-    # Extract data for classification
-    try:
-        # Handle sparse matrices if needed
-        if sparse.issparse(combined_adata.X):
-            X_ref = combined_adata.X[ref_idx].toarray()
-            X_bulk = combined_adata.X[bulk_idx].toarray()
+    # Results list to store classification results
+    results = []
+    
+    # Extract embeddings for both reference and bulk data
+    if 'X_umap' in combined_adata.obsm:
+        logger.info("Using UMAP embeddings for kNN search")
+        embedding_key = 'X_umap'
+    elif 'X_pca' in combined_adata.obsm:
+        logger.info("Using PCA embeddings for kNN search")
+        embedding_key = 'X_pca'
+    else:
+        # Fall back to gene expression space
+        logger.info("No dimensionality reduction found, will use gene expression space")
+        embedding_key = None
+    
+    # Process each bulk sample independently
+    for i, bulk_idx_i in enumerate(bulk_idx):
+        logger.info(f"Processing bulk sample {i+1}/{len(bulk_idx)}: {combined_adata.obs.index[bulk_idx_i]}")
+        
+        # Get embeddings for this bulk sample and all reference cells
+        if embedding_key is not None:
+            # Using dimensionality reduction embeddings
+            bulk_sample_embedding = combined_adata.obsm[embedding_key][bulk_idx_i].reshape(1, -1)
+            ref_embeddings = combined_adata.obsm[embedding_key][ref_idx]
         else:
-            X_ref = combined_adata.X[ref_idx]
-            X_bulk = combined_adata.X[bulk_idx]
+            # Using gene expression space
+            if sparse.issparse(combined_adata.X):
+                bulk_sample_embedding = combined_adata.X[bulk_idx_i].toarray().reshape(1, -1)
+                ref_embeddings = combined_adata.X[ref_idx].toarray()
+            else:
+                bulk_sample_embedding = combined_adata.X[bulk_idx_i].reshape(1, -1)
+                ref_embeddings = combined_adata.X[ref_idx]
         
         # Handle any NaNs or infs
-        X_ref = np.nan_to_num(X_ref, nan=0, posinf=0, neginf=0)
-        X_bulk = np.nan_to_num(X_bulk, nan=0, posinf=0, neginf=0)
+        bulk_sample_embedding = np.nan_to_num(bulk_sample_embedding, nan=0, posinf=0, neginf=0)
+        ref_embeddings = np.nan_to_num(ref_embeddings, nan=0, posinf=0, neginf=0)
         
         # Build kd-tree for efficient nearest neighbor search
-        tree = cKDTree(X_ref)
-        distances, neighbor_idx = tree.query(X_bulk, k=k)
+        tree = cKDTree(ref_embeddings)
         
-        # Get reference cell labels
-        ref_labels = combined_adata.obs.loc[ref_indices, ref_label_key].values
+        # Query KD-tree to find k nearest neighbors for this bulk sample
+        distances, neighbor_indices = tree.query(bulk_sample_embedding, k=k)
         
-        results = []
-        for i, (dists, neighbors) in enumerate(zip(distances, neighbor_idx)):
-            # Get labels of k nearest neighbors
-            neighbor_labels = ref_labels[neighbors]
-            
-            # Determine the most frequent label (majority vote)
-            unique_labels, counts = np.unique(neighbor_labels, return_counts=True)
-            assigned_label = unique_labels[np.argmax(counts)]
-            max_count = counts[np.argmax(counts)]
-            
-            # Calculate confidence score (percentage of neighbors with the assigned label)
-            confidence = max_count / k
-            
-            # Compute p-value with permutation test
-            p_value = compute_p_value(neighbor_labels, assigned_label, k, num_permutations)
-            
-            # Store results
-            results.append({
-                "Bulk_Sample": combined_adata.obs.index[bulk_idx[i]],
-                "Predicted_Label": assigned_label,
-                "Confidence": confidence,
-                "P_value": p_value,
-                "Nearest_Neighbors": list(combined_adata.obs.index[ref_idx[neighbors]]),
-                "Neighbor_Labels": list(neighbor_labels),
-                "Neighbor_Distances": list(dists)
-            })
+        # Reshape to 1D arrays
+        distances = distances.flatten()
+        neighbor_indices = neighbor_indices.flatten()
         
-        # Create results DataFrame
-        results_df = pd.DataFrame(results)
+        # Get labels of the k nearest neighbors for this bulk sample
+        neighbor_labels = ref_labels[neighbor_indices]
         
-        # Add predicted labels to the combined dataset
-        for i, idx in enumerate(bulk_idx):
-            combined_adata.obs.loc[combined_adata.obs.index[idx], ref_label_key] = results_df.iloc[i]["Predicted_Label"]
+        # Determine the most frequent label (majority vote)
+        unique_labels, counts = np.unique(neighbor_labels, return_counts=True)
+        assigned_label = unique_labels[np.argmax(counts)]
+        max_count = counts[np.argmax(counts)]
         
-        logger.info("kNN classification completed")
-        return results_df, combined_adata
+        # Calculate confidence score (percentage of neighbors with the assigned label)
+        confidence = max_count / k
+        
+        # Compute p-value with permutation test
+        p_value = compute_p_value(neighbor_labels, assigned_label, k, num_permutations)
+        
+        # Get indices of reference cells corresponding to the nearest neighbors
+        neighbor_ref_indices = ref_idx[neighbor_indices]
+        
+        # Get the actual cell IDs for the nearest neighbors
+        neighbor_cell_ids = [combined_adata.obs.index[idx] for idx in neighbor_ref_indices]
+        
+        # Store results for this bulk sample
+        results.append({
+            "Bulk_Sample": combined_adata.obs.index[bulk_idx_i],
+            "Predicted_Label": assigned_label,
+            "Confidence": confidence,
+            "P_value": p_value,
+            "Nearest_Neighbors": neighbor_cell_ids,
+            "Neighbor_Labels": list(neighbor_labels),
+            "Neighbor_Distances": list(distances)
+        })
+        
+        # Assign the predicted label directly to the original dataset
+        combined_adata.obs.loc[combined_adata.obs.index[bulk_idx_i], ref_label_key] = assigned_label
+        
+        # Force garbage collection after processing each sample
+        gc.collect()
     
-    except Exception as e:
-        logger.error(f"kNN classification failed: {e}")
-        import traceback
-        logger.error(traceback.format_exc())
-        raise
+    # Create results DataFrame
+    results_df = pd.DataFrame(results)
+    logger.info(f"kNN classification completed for all {len(bulk_idx)} bulk samples")
+    
+    # Print a summary of the results
+    logger.info("Classification summary:")
+    for label, count in results_df['Predicted_Label'].value_counts().items():
+        logger.info(f"  {label}: {count} bulk samples")
+    
+    return results_df, combined_adata
 
 
 def visualize_integration(combined_adata, annotation_key, plots_dir):
@@ -370,65 +1349,283 @@ def visualize_integration(combined_adata, annotation_key, plots_dir):
     
     return combined_adata
 
+def identify_marker_genes(adata, annotation):
+    sc.tl.rank_genes_groups(adata, annotation, method='wilcoxon') #Find marker genes by tissue instead of by leiden clustering (done earlier)
+    marker_genes = adata.uns['rank_genes_groups']['names']
 
-def main():
-    """Main function to run the integration pipeline."""
-    # Parse arguments
-    args = parse_arguments()
+    # Get the top N genes for each cluster
+    n_top_genes = 5
+    top_genes = pd.DataFrame(marker_genes).iloc[:n_top_genes]
+
+    sc.pl.rank_genes_groups_dotplot(
+        adata,
+        groupby=annotation,  # Use tissue labels for grouping instead of 'leiden'
+        n_genes=4,
+        values_to_plot="logfoldchanges", cmap='bwr', #changed from 'viridis'  
+        vmin=-4,
+        vmax=4,
+        min_logfoldchange=3,
+        colorbar_title='log fold change'
+    )
+    plt.savefig('marker_genes_by_tissue.pdf')
+    plt.close()
+
+# Log start of processing
+logger.info("Starting Scanpy bulk to single-cell integration pipeline")
+logger.info(f"Bulk data: {bulk_path}")
+logger.info(f"Reference data: {ref_path}")
+logger.info(f"Output directory: {output_dir}")
+
+# try:
+# Load and validate data
+bulk_adata, ref_adata = load_and_validate_data(bulk_path, ref_path)
+
+# Preprocess data
+bulk_processed, ref_processed = preprocess_data(bulk_adata, ref_adata, annotation_key)
+
+# Sample even cell types across the reference
+ref_processed=subsample_celltypes(ref_processed, annotation_key)
+
+# Integrate datasets
+combined_adata = integrate_datasets(bulk_processed, ref_processed)
+
+# Determine optimal k if not provided
+k = k_neighbors
+if k is None:
+    k = determine_optimal_k(ref_processed, annotation_key)
+
+# Run kNN classification
+results_df, annotated_adata = kNN_classifier(
+    combined_adata,
+    ref_label_key=annotation_key,
+    k=k,
+    num_permutations=num_permutations
+)
+
+# Generate visualizations
+annotated_adata = visualize_integration(annotated_adata, annotation_key, plots_dir)
+
+# Extract bulk annotations and save to files
+bulk_samples = annotated_adata[annotated_adata.obs['dataset'] == 'bulk']
+bulk_annotations = bulk_samples.obs[[annotation_key]]
+
+# Save results
+results_df.to_csv(os.path.join(output_dir, 'bulk_classification_results.csv'), index=False)
+bulk_annotations.to_csv(os.path.join(output_dir, 'bulk_annotations.csv'))
+annotated_adata.write_h5ad(os.path.join(output_dir, 'annotated_data.h5ad'))
+
+logger.info("Integration pipeline completed successfully")
+logger.info(f"Results saved to {output_dir}")
+
+# Plot UMAP
+logger.info("Plotting UMAP...")
+
+
+# Plot Annotated UMAP:
+sc.pl.umap(combined_adata, color=[annotation_key], show=False)
+
+# Get the UMAP coordinates
+umap_coords = combined_adata.obsm['X_umap']
+
+# Get your sample labels from the data
+labels = combined_adata.obs['Sample']
+
+# Iterate over each point and add a label if it's not NA
+for idx, label in enumerate(labels):
+    if pd.notna(label):  # Check if the label is not NA
+
+        plt.plot(umap_coords[idx, 0], umap_coords[idx, 1], 
+                color=color_dict[label[:-8]], 
+                marker='o',            # '*' for star marker
+                markersize=10,          # Increase size for better visibility
+                markeredgecolor='white', # White outline
+                markeredgewidth=0.25,   # Width of the outline
+                alpha=1)    # Remove background grid and ticks for a cleaner look
+plt.grid(False)
+
+# Adjust layout to fit the legend outside
+plt.tight_layout(rect=[0, 0, 0.85, 1])  # Leaves space for legend on the right
+plt.savefig(f'{output_dir}/combined_dataset_samples_and_tissue.pdf', dpi=600, bbox_inches="tight")
+plt.show() 
+
+plt.close()
+
+def plot_enhanced_umap(combined_adata, annotation_key, plots_dir):
+    """Generate enhanced UMAP visualizations that better show differences between groups."""
+    # Create a figure with two subplots side by side
+    fig, axes = plt.subplots(1, 2, figsize=(20, 8))
     
-    # Set up environment
-    plots_dir = setup_environment(args)
+    # Plot 1: Reference cells with bulk cells highlighted by sample group
+    ax = axes[0]
     
-    # Log start of processing
-    logger.info("Starting Scanpy bulk to single-cell integration pipeline")
-    logger.info(f"Bulk data: {args.bulk_path}")
-    logger.info(f"Reference data: {args.ref_path}")
-    logger.info(f"Output directory: {args.output_dir}")
+    # Plot reference cells in gray first
+    ref_mask = combined_adata.obs['dataset'] == 'reference'
+    ax.scatter(
+        combined_adata.obsm['X_umap'][ref_mask, 0],
+        combined_adata.obsm['X_umap'][ref_mask, 1],
+        c='lightgray', s=5, alpha=0.3, label='Reference Cells'
+    )
     
-    try:
-        # Load and validate data
-        bulk_adata, ref_adata = load_and_validate_data(args.bulk_path, args.ref_path)
+    # Get sample groups (assuming Sample column format like "JW18DOX221117-1")
+    bulk_mask = combined_adata.obs['dataset'] == 'bulk'
+    sample_groups = []
+    for sample_name in combined_adata.obs.loc[bulk_mask, 'Sample']:
+        # Extract the prefix (e.g., "JW18DOX", "JW18wMel", "S2DOX", "S2wMel")
+        if pd.notna(sample_name):
+            prefix = sample_name.split('221117')[0]  # Remove date and number suffix
+            sample_groups.append(prefix)
+        else:
+            sample_groups.append('Unknown')
+    
+    # Add Sample group as a new column
+    combined_adata.obs.loc[bulk_mask, 'SampleGroup'] = sample_groups
+    
+    # Plot bulk samples with colors based on their sample group
+    for group, color in color_dict.items():
+        group_mask = (combined_adata.obs['dataset'] == 'bulk') & (combined_adata.obs['SampleGroup'] == group)
+        ax.scatter(
+            combined_adata.obsm['X_umap'][group_mask, 0],
+            combined_adata.obsm['X_umap'][group_mask, 1],
+            c=color, s=100, alpha=0.9, label=f'{group}',
+            edgecolors='white', linewidths=0.5
+        )
+    
+    ax.set_title('UMAP - Samples Colored by Experimental Condition')
+    ax.legend(loc='upper right')
+    ax.grid(False)
+    ax.set_xlabel('UMAP 1')
+    ax.set_ylabel('UMAP 2')
+    
+    # Plot 2: Reference cells colored by cell type, bulk samples as larger points
+    ax = axes[1]
+    
+    # Create a colormap for cell types
+    cell_types = combined_adata.obs[annotation_key].cat.categories
+    n_cell_types = len(cell_types)
+    colors = plt.cm.tab20(np.linspace(0, 1, n_cell_types))
+    
+    # Plot reference cells colored by cell type
+    for i, cell_type in enumerate(cell_types):
+        ct_mask = (combined_adata.obs['dataset'] == 'reference') & (combined_adata.obs[annotation_key] == cell_type)
+        ax.scatter(
+            combined_adata.obsm['X_umap'][ct_mask, 0],
+            combined_adata.obsm['X_umap'][ct_mask, 1],
+            c=[colors[i]], s=10, alpha=0.6, label=f'{cell_type}'
+        )
+    
+    # Plot bulk samples as larger points
+    for i, cell_type in enumerate(cell_types):
+        ct_mask = (combined_adata.obs['dataset'] == 'bulk') & (combined_adata.obs[annotation_key] == cell_type)
+        ax.scatter(
+            combined_adata.obsm['X_umap'][ct_mask, 0],
+            combined_adata.obsm['X_umap'][ct_mask, 1],
+            c=[colors[i]], s=150, alpha=1.0, edgecolors='black', linewidths=0.5
+        )
+    
+    ax.set_title(f'UMAP - Cell Types ({annotation_key})')
+    ax.legend(loc='upper right')
+    ax.grid(False)
+    ax.set_xlabel('UMAP 1')
+    ax.set_ylabel('UMAP 2')
+    
+    plt.tight_layout()
+    plt.savefig(os.path.join(plots_dir, 'enhanced_umap_visualization.pdf'), bbox_inches='tight', dpi=300)
+    plt.close()
+    
+    # Create a visualization to verify KNN classification results
+    verify_knn_visualization(combined_adata, annotation_key, plots_dir)
+    
+    return combined_adata
+
+def verify_knn_visualization(combined_adata, annotation_key, plots_dir):
+    """Create a visualization to verify KNN classification results for a few samples."""
+    bulk_mask = combined_adata.obs['dataset'] == 'bulk'
+    ref_mask = combined_adata.obs['dataset'] == 'reference'
+    
+    # Get sample groups
+    sample_groups = combined_adata.obs.loc[bulk_mask, 'SampleGroup'].unique()
+    
+    # Select one sample from each group to visualize
+    selected_samples = []
+    for group in sample_groups:
+        group_samples = combined_adata.obs.loc[bulk_mask & (combined_adata.obs['SampleGroup'] == group)].index
+        if len(group_samples) > 0:
+            selected_samples.append(group_samples[0])
+    
+    # Create a figure with subplots for each selected sample
+    fig, axes = plt.subplots(len(selected_samples), 1, figsize=(12, 6*len(selected_samples)))
+    if len(selected_samples) == 1:
+        axes = [axes]  # Make axes iterable if only one subplot
+    
+    # For each selected sample
+    for i, sample_id in enumerate(selected_samples):
+        ax = axes[i]
         
-        # Preprocess data
-        bulk_processed, ref_processed = preprocess_data(bulk_adata, ref_adata, args.annotation_key)
+        # Get sample info
+        sample_idx = combined_adata.obs.index.get_loc(sample_id)
+        sample_group = combined_adata.obs.loc[sample_id, 'SampleGroup']
+        predicted_label = combined_adata.obs.loc[sample_id, annotation_key]
         
-        # Integrate datasets
-        combined_adata = integrate_datasets(bulk_processed, ref_processed)
-        
-        # Determine optimal k if not provided
-        k = args.k_neighbors
-        if k is None:
-            k = determine_optimal_k(ref_processed, args.annotation_key)
-        
-        # Run kNN classification
-        results_df, annotated_adata = kNN_classifier(
-            combined_adata,
-            ref_label_key=args.annotation_key,
-            k=k,
-            num_permutations=args.num_permutations
+        # Plot all reference cells as background
+        ax.scatter(
+            combined_adata.obsm['X_umap'][ref_mask, 0],
+            combined_adata.obsm['X_umap'][ref_mask, 1],
+            c='lightgray', s=5, alpha=0.2
         )
         
-        # Generate visualizations
-        annotated_adata = visualize_integration(annotated_adata, args.annotation_key, plots_dir)
+        # Plot cells of the predicted cell type
+        pred_mask = ref_mask & (combined_adata.obs[annotation_key] == predicted_label)
+        ax.scatter(
+            combined_adata.obsm['X_umap'][pred_mask, 0],
+            combined_adata.obsm['X_umap'][pred_mask, 1],
+            c='blue', s=20, alpha=0.5, label=f'Reference {predicted_label} cells'
+        )
         
-        # Extract bulk annotations and save to files
-        bulk_samples = annotated_adata[annotated_adata.obs['dataset'] == 'bulk']
-        bulk_annotations = bulk_samples.obs[[args.annotation_key]]
+        # Plot the sample itself
+        ax.scatter(
+            combined_adata.obsm['X_umap'][sample_idx, 0],
+            combined_adata.obsm['X_umap'][sample_idx, 1],
+            c=color_dict[sample_group], s=200, alpha=1.0, 
+            edgecolors='black', linewidths=1.0,
+            label=f'{sample_id} ({sample_group})'
+        )
         
-        # Save results
-        results_df.to_csv(os.path.join(args.output_dir, 'bulk_classification_results.csv'), index=False)
-        bulk_annotations.to_csv(os.path.join(args.output_dir, 'bulk_annotations.csv'))
-        annotated_adata.write_h5ad(os.path.join(args.output_dir, 'annotated_data.h5ad'))
+        # Get the K nearest neighbors for this sample from the results file
+        # Note: This would need the results DataFrame to be passed as an argument
+        # For visualization purposes, we'll just use the 10 nearest reference cells based on UMAP distance
         
-        logger.info("Integration pipeline completed successfully")
-        logger.info(f"Results saved to {args.output_dir}")
+        # Calculate distances in UMAP space
+        sample_umap = combined_adata.obsm['X_umap'][sample_idx]
+        ref_umaps = combined_adata.obsm['X_umap'][ref_mask]
         
-    except Exception as e:
-        logger.error(f"Integration pipeline failed: {e}")
-        import traceback
-        logger.error(traceback.format_exc())
-        sys.exit(1)
+        # Calculate Euclidean distances
+        distances = np.sqrt(np.sum((ref_umaps - sample_umap)**2, axis=1))
+        
+        # Get indices of 10 nearest neighbors
+        nearest_indices = np.argsort(distances)[:10]
+        nearest_indices = np.where(ref_mask)[0][nearest_indices]
+        
+        # Plot nearest neighbors
+        ax.scatter(
+            combined_adata.obsm['X_umap'][nearest_indices, 0],
+            combined_adata.obsm['X_umap'][nearest_indices, 1],
+            c='red', s=80, alpha=0.7, 
+            edgecolors='black', linewidths=0.5,
+            marker='*', label='Nearest neighbors (UMAP space)'
+        )
+        
+        ax.set_title(f'Sample: {sample_id} - Group: {sample_group} - Predicted: {predicted_label}')
+        ax.legend(loc='upper right')
+        ax.grid(False)
+        ax.set_xlabel('UMAP 1')
+        ax.set_ylabel('UMAP 2')
+    
+    plt.tight_layout()
+    plt.savefig(os.path.join(plots_dir, 'knn_verification.pdf'), bbox_inches='tight', dpi=300)
+    plt.close()
 
+# Plot enhanced UMAP visualization
+plot_enhanced_umap(combined_adata, annotation_key, plots_dir)
 
-if __name__ == "__main__":
-    main()
+# Verify KNN classification results
+verify_knn_visualization(combined_adata, annotation_key, plots_dir)

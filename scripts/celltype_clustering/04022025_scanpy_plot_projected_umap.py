@@ -5,9 +5,27 @@
     # python /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/pub_scipts/04022025_scanpy_plot_projected_umap.py \
     #    -d /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad \
     #    -r /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/data/atlas/myeloid_cho_et_al_2020/allnew20210215_circulation.combined.indep_harmony.h5ad \
-    #    -o /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/figures/blood_atlas \
+    #    -o /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/figures/blood_atlas/20250317 \
     #    -a "subclustering" \
     #    --mem 1024
+
+
+# Run with:
+    # python /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/pub_scipts/04022025_scanpy_plot_projected_umap.py \
+    #    -d /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad \
+    #    -r /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/fca_adata.h5ad \
+    #    -o /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/figures/fca_atlas/20250317 \
+    #    -a "tissue" \
+    #    --mem 2024
+
+
+# Run with:
+    # python /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/pub_scipts/04022025_scanpy_plot_projected_umap.py \
+    #    -d /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad \
+    #    -r /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/embryo_adata_dense.h5ad \
+    #    -o /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/figures/embryo_atlas/20250317 \
+    #    -a "cell_type" \
+    #    --mem 2024
 
 import scanpy as sc
 import pandas as pd
@@ -73,12 +91,12 @@ print(f"Memory limit set to: {mem_limit / (1024 ** 3)} GB")
 sc.settings.verbosity = 0  
 sc.settings.set_figure_params(dpi=600, frameon=False, facecolor='white', format='pdf', vector_friendly=True)
 
-## Color map 
+# Color map to match final figures
 color_dict={
-    'JW18DOX':'#C7E576',
-    'JW18wMel':'#241E4E',
-    'S2DOX':'#F4E04D',
-    'S2wMel':'#587792'
+    'JW18DOX':'#87de87', # green
+    'JW18wMel':'#00aa44',  # dark green
+    'S2DOX':'#ffb380', # orange
+    'S2wMel':'#d45500' # dark orange
 
 }
 
@@ -235,6 +253,8 @@ def identify_marker_genes(adata, annotation):
     )
     plt.savefig('marker_genes_by_tissue.pdf')
     plt.close()
+
+
 
 
 # Load data

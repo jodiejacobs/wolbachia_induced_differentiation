@@ -1,0 +1,159 @@
+2025-03-12 16:50:13,953 - INFO - Starting cell type deconvolution pipeline
+2025-03-12 16:50:13,953 - INFO - Starting cell type deconvolution pipeline
+2025-03-12 16:50:13,956 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-12 16:50:13,956 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-12 16:50:13,957 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-12 16:50:13,957 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-12 16:50:13,959 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/blood_atlas
+2025-03-12 16:50:13,959 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/blood_atlas
+2025-03-12 16:50:13,960 - INFO - Loading data files...
+2025-03-12 16:50:13,960 - INFO - Loading data files...
+2025-03-12 16:50:14,205 - INFO - Bulk dataset loaded: (24, 10957) (cells × genes)
+2025-03-12 16:50:14,205 - INFO - Bulk dataset loaded: (24, 10957) (cells × genes)
+2025-03-12 16:50:16,838 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-12 16:50:16,838 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-12 16:50:16,846 - INFO - Using 1024 shared genes
+2025-03-12 16:50:16,846 - INFO - Using 1024 shared genes
+2025-03-12 16:50:16,849 - INFO - Identifying marker genes for each cell type using subsample...
+2025-03-12 16:50:16,849 - INFO - Identifying marker genes for each cell type using subsample...
+2025-03-12 16:53:00,329 - INFO - Starting cell type deconvolution pipeline
+2025-03-12 16:53:00,329 - INFO - Starting cell type deconvolution pipeline
+2025-03-12 16:53:00,329 - INFO - Starting cell type deconvolution pipeline
+2025-03-12 16:53:00,332 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-12 16:53:00,332 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-12 16:53:00,332 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-12 16:53:00,333 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-12 16:53:00,333 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-12 16:53:00,333 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+2025-03-12 16:53:00,334 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/blood_atlas
+2025-03-12 16:53:00,334 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/blood_atlas
+2025-03-12 16:53:00,334 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/blood_atlas
+2025-03-12 16:53:00,335 - INFO - Loading data files...
+2025-03-12 16:53:00,335 - INFO - Loading data files...
+2025-03-12 16:53:00,335 - INFO - Loading data files...
+2025-03-12 16:53:00,954 - INFO - Bulk dataset loaded: (24, 10957) (cells × genes)
+2025-03-12 16:53:00,954 - INFO - Bulk dataset loaded: (24, 10957) (cells × genes)
+2025-03-12 16:53:00,954 - INFO - Bulk dataset loaded: (24, 10957) (cells × genes)
+2025-03-12 16:53:02,491 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-12 16:53:02,491 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-12 16:53:02,491 - INFO - Reference dataset loaded: (14399, 2000) (cells × genes)
+2025-03-12 16:53:02,502 - INFO - Using 1024 shared genes
+2025-03-12 16:53:02,502 - INFO - Using 1024 shared genes
+2025-03-12 16:53:02,502 - INFO - Using 1024 shared genes
+2025-03-12 16:53:02,504 - INFO - Identifying marker genes for each cell type using subclustering...
+2025-03-12 16:53:02,504 - INFO - Identifying marker genes for each cell type using subclustering...
+2025-03-12 16:53:02,504 - INFO - Identifying marker genes for each cell type using subclustering...
+2025-03-12 16:53:02,505 - INFO - Found 5 cell types
+2025-03-12 16:53:02,505 - INFO - Found 5 cell types
+2025-03-12 16:53:02,505 - INFO - Found 5 cell types
+2025-03-12 16:53:02,509 - INFO - Using 5 cell types with more than one sample for statistical testing
+2025-03-12 16:53:02,509 - INFO - Using 5 cell types with more than one sample for statistical testing
+2025-03-12 16:53:02,509 - INFO - Using 5 cell types with more than one sample for statistical testing
+2025-03-12 16:53:47,227 - INFO - Identified 100 marker genes for each of 5 cell types
+2025-03-12 16:53:47,227 - INFO - Identified 100 marker genes for each of 5 cell types
+2025-03-12 16:53:47,227 - INFO - Identified 100 marker genes for each of 5 cell types
+2025-03-12 16:54:04,977 - INFO - Created marker gene heatmap
+2025-03-12 16:54:04,977 - INFO - Created marker gene heatmap
+2025-03-12 16:54:04,977 - INFO - Created marker gene heatmap
+2025-03-12 16:54:04,987 - INFO - Creating cell type signature matrix...
+2025-03-12 16:54:04,987 - INFO - Creating cell type signature matrix...
+2025-03-12 16:54:04,987 - INFO - Creating cell type signature matrix...
+2025-03-12 16:54:07,079 - INFO - Created signature matrix with 1024 genes and 5 cell types
+2025-03-12 16:54:07,079 - INFO - Created signature matrix with 1024 genes and 5 cell types
+2025-03-12 16:54:07,079 - INFO - Created signature matrix with 1024 genes and 5 cell types
+2025-03-12 16:54:07,103 - INFO - Validating deconvolution approach...
+2025-03-12 16:54:07,103 - INFO - Validating deconvolution approach...
+2025-03-12 16:54:07,103 - INFO - Validating deconvolution approach...
+2025-03-12 16:54:07,105 - INFO - Creating 20 pseudobulk samples for validation...
+2025-03-12 16:54:07,105 - INFO - Creating 20 pseudobulk samples for validation...
+2025-03-12 16:54:07,105 - INFO - Creating 20 pseudobulk samples for validation...
+2025-03-12 16:54:15,498 - INFO - Pseudobulk validation samples created
+2025-03-12 16:54:15,498 - INFO - Pseudobulk validation samples created
+2025-03-12 16:54:15,498 - INFO - Pseudobulk validation samples created
+2025-03-12 16:54:15,500 - INFO - Deconvolving bulk samples into cell type proportions...
+2025-03-12 16:54:15,500 - INFO - Deconvolving bulk samples into cell type proportions...
+2025-03-12 16:54:15,500 - INFO - Deconvolving bulk samples into cell type proportions...
+2025-03-12 16:54:15,511 - INFO - Deconvolved 1/20 bulk samples
+2025-03-12 16:54:15,511 - INFO - Deconvolved 1/20 bulk samples
+2025-03-12 16:54:15,511 - INFO - Deconvolved 1/20 bulk samples
+2025-03-12 16:54:15,523 - INFO - Deconvolved 10/20 bulk samples
+2025-03-12 16:54:15,523 - INFO - Deconvolved 10/20 bulk samples
+2025-03-12 16:54:15,523 - INFO - Deconvolved 10/20 bulk samples
+2025-03-12 16:54:15,534 - INFO - Deconvolved 20/20 bulk samples
+2025-03-12 16:54:15,534 - INFO - Deconvolved 20/20 bulk samples
+2025-03-12 16:54:15,534 - INFO - Deconvolved 20/20 bulk samples
+2025-03-12 16:54:15,536 - INFO - Deconvolution completed
+2025-03-12 16:54:15,536 - INFO - Deconvolution completed
+2025-03-12 16:54:15,536 - INFO - Deconvolution completed
+2025-03-12 16:54:15,551 - INFO - Validation results: Mean correlation = 0.443, Mean RMSE = 0.255
+2025-03-12 16:54:15,551 - INFO - Validation results: Mean correlation = 0.443, Mean RMSE = 0.255
+2025-03-12 16:54:15,551 - INFO - Validation results: Mean correlation = 0.443, Mean RMSE = 0.255
+2025-03-12 16:54:16,048 - INFO - Calculating confidence intervals using 1 bootstrap iterations...
+2025-03-12 16:54:16,048 - INFO - Calculating confidence intervals using 1 bootstrap iterations...
+2025-03-12 16:54:16,048 - INFO - Calculating confidence intervals using 1 bootstrap iterations...
+2025-03-12 16:54:16,112 - INFO - Deconvolving bulk samples into cell type proportions...
+2025-03-12 16:54:16,112 - INFO - Deconvolving bulk samples into cell type proportions...
+2025-03-12 16:54:16,112 - INFO - Deconvolving bulk samples into cell type proportions...
+2025-03-12 16:54:16,165 - INFO - Deconvolved 1/24 bulk samples
+2025-03-12 16:54:16,165 - INFO - Deconvolved 1/24 bulk samples
+2025-03-12 16:54:16,165 - INFO - Deconvolved 1/24 bulk samples
+2025-03-12 16:54:16,176 - INFO - Deconvolved 10/24 bulk samples
+2025-03-12 16:54:16,176 - INFO - Deconvolved 10/24 bulk samples
+2025-03-12 16:54:16,176 - INFO - Deconvolved 10/24 bulk samples
+2025-03-12 16:54:16,186 - INFO - Deconvolved 20/24 bulk samples
+2025-03-12 16:54:16,186 - INFO - Deconvolved 20/24 bulk samples
+2025-03-12 16:54:16,186 - INFO - Deconvolved 20/24 bulk samples
+2025-03-12 16:54:16,192 - INFO - Deconvolved 24/24 bulk samples
+2025-03-12 16:54:16,192 - INFO - Deconvolved 24/24 bulk samples
+2025-03-12 16:54:16,192 - INFO - Deconvolved 24/24 bulk samples
+2025-03-12 16:54:16,193 - INFO - Deconvolution completed
+2025-03-12 16:54:16,193 - INFO - Deconvolution completed
+2025-03-12 16:54:16,193 - INFO - Deconvolution completed
+2025-03-12 16:54:16,203 - INFO - Deconvolving bulk samples into cell type proportions...
+2025-03-12 16:54:16,203 - INFO - Deconvolving bulk samples into cell type proportions...
+2025-03-12 16:54:16,203 - INFO - Deconvolving bulk samples into cell type proportions...
+2025-03-12 16:54:16,256 - INFO - Deconvolved 1/24 bulk samples
+2025-03-12 16:54:16,256 - INFO - Deconvolved 1/24 bulk samples
+2025-03-12 16:54:16,256 - INFO - Deconvolved 1/24 bulk samples
+2025-03-12 16:54:16,267 - INFO - Deconvolved 10/24 bulk samples
+2025-03-12 16:54:16,267 - INFO - Deconvolved 10/24 bulk samples
+2025-03-12 16:54:16,267 - INFO - Deconvolved 10/24 bulk samples
+2025-03-12 16:54:16,277 - INFO - Deconvolved 20/24 bulk samples
+2025-03-12 16:54:16,277 - INFO - Deconvolved 20/24 bulk samples
+2025-03-12 16:54:16,277 - INFO - Deconvolved 20/24 bulk samples
+2025-03-12 16:54:16,283 - INFO - Deconvolved 24/24 bulk samples
+2025-03-12 16:54:16,283 - INFO - Deconvolved 24/24 bulk samples
+2025-03-12 16:54:16,283 - INFO - Deconvolved 24/24 bulk samples
+2025-03-12 16:54:16,285 - INFO - Deconvolution completed
+2025-03-12 16:54:16,285 - INFO - Deconvolution completed
+2025-03-12 16:54:16,285 - INFO - Deconvolution completed
+2025-03-12 16:54:16,289 - INFO - Confidence interval calculation completed
+2025-03-12 16:54:16,289 - INFO - Confidence interval calculation completed
+2025-03-12 16:54:16,289 - INFO - Confidence interval calculation completed
+2025-03-12 16:54:16,319 - INFO - Creating deconvolution visualizations...
+2025-03-12 16:54:16,319 - INFO - Creating deconvolution visualizations...
+2025-03-12 16:54:16,319 - INFO - Creating deconvolution visualizations...
+2025-03-12 16:54:17,621 - INFO - Created deconvolution heatmap
+2025-03-12 16:54:17,621 - INFO - Created deconvolution heatmap
+2025-03-12 16:54:17,621 - INFO - Created deconvolution heatmap
+2025-03-12 16:54:19,035 - INFO - Created stacked bar chart
+2025-03-12 16:54:19,035 - INFO - Created stacked bar chart
+2025-03-12 16:54:19,035 - INFO - Created stacked bar chart
+2025-03-12 16:54:19,525 - INFO - Created example validation plot
+2025-03-12 16:54:19,525 - INFO - Created example validation plot
+2025-03-12 16:54:19,525 - INFO - Created example validation plot
+2025-03-12 16:54:32,232 - INFO - Created sample composition plots
+2025-03-12 16:54:32,232 - INFO - Created sample composition plots
+2025-03-12 16:54:32,232 - INFO - Created sample composition plots
+2025-03-12 16:54:33,985 - INFO - Created hierarchical clustering plot
+2025-03-12 16:54:33,985 - INFO - Created hierarchical clustering plot
+2025-03-12 16:54:33,985 - INFO - Created hierarchical clustering plot
+2025-03-12 16:54:33,987 - INFO - Visualization creation completed
+2025-03-12 16:54:33,987 - INFO - Visualization creation completed
+2025-03-12 16:54:33,987 - INFO - Visualization creation completed
+2025-03-12 16:54:33,998 - INFO - Deconvolution pipeline completed successfully
+2025-03-12 16:54:33,998 - INFO - Deconvolution pipeline completed successfully
+2025-03-12 16:54:33,998 - INFO - Deconvolution pipeline completed successfully
+2025-03-12 16:54:33,999 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/blood_atlas
+2025-03-12 16:54:33,999 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/blood_atlas
+2025-03-12 16:54:33,999 - INFO - Results saved to /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/deconvolution/blood_atlas

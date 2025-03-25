@@ -1,0 +1,16 @@
+2025-03-13 14:31:39,912 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 14:31:39,912 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 14:31:39,912 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/data/atlas/peng_2024_fruitfly_organogenesis/re_analysis_20250121/peng2024_embryo_atlas_all_annotations.h5ad
+2025-03-13 14:31:39,912 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/embryo_atlas_v4
+2025-03-13 14:31:39,913 - INFO - Loading data files...
+2025-03-13 14:31:40,486 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 14:32:41,111 - INFO - Reference dataset loaded: (502680, 23932) (cells × genes)
+2025-03-13 14:32:41,122 - ERROR - No shared genes between bulk and reference datasets!
+2025-03-13 14:35:56,576 - INFO - Starting Scanpy bulk to single-cell integration pipeline
+2025-03-13 14:35:57,021 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+2025-03-13 14:35:57,022 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/data/atlas/peng_2024_fruitfly_organogenesis/re_analysis_20250121/peng2024_embryo_atlas_all_annotations.h5ad
+2025-03-13 14:35:57,022 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/embryo_atlas_v4
+2025-03-13 14:35:57,022 - INFO - Loading data files...
+2025-03-13 14:35:57,229 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
+2025-03-13 14:36:56,063 - INFO - Reference dataset loaded: (502680, 23932) (cells × genes)
+2025-03-13 14:36:56,074 - ERROR - No shared genes between bulk and reference datasets!

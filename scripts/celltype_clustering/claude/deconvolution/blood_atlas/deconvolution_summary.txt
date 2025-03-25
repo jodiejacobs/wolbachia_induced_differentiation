@@ -1,0 +1,18 @@
+Cell Type Deconvolution Summary
+===============================
+
+Bulk dataset: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
+Reference dataset: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/blood_adata.h5ad
+Number of bulk samples: 24
+Number of reference cells: 14399
+Number of shared genes: 1024
+Number of cell types: 5
+
+Validation correlation score: 0.443
+
+Top cell types by average proportion:
+  LM: 0.592
+  CC: 0.408
+  GST-rich: 0.000
+  PH: 0.000
+  PM: 0.000
