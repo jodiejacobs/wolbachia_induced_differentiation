@@ -31,13 +31,12 @@ mappability = '/private/groups/russelllab/jodie/wolbachia_induced_DE/micro-c/map
 
 # Map D. melanogaster chromosome names to RefSeq accessions
 chrom_to_refseq = {
-    '2L': 'NC_004354.4',  # Chromosome 2L
-    '2R': 'NC_004355.4',  # Chromosome 2R
-    '3L': 'NC_004356.4',  # Chromosome 3L
-    '3R': 'NC_004357.4',  # Chromosome 3R
+    'X': 'NC_004354.4',  # Chromosome X
+    '2L': 'NT_033779.5',   # Chromosome 2L
+    '2R': 'NT_033778.4',  # Chromosome 2R
+    '3L': 'NT_037436.4',  # Chromosome 3L
+    '3R': 'NT_033777.3',  # Chromosome 3R
     '4': 'NC_004353.4',   # Chromosome 4
-    'X': 'NC_004354.4',   # Chromosome X
-    'Y': 'NC_024512.1'    # Chromosome Y
 }
 
 # Extract CG number from gene name or ID
