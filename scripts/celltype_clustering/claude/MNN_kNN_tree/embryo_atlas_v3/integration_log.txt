@@ -1,8 +1,0 @@
-2025-03-13 13:10:24,195 - INFO - Starting Scanpy bulk to single-cell integration pipeline
-2025-03-13 13:10:24,196 - INFO - Bulk data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/bulk_adata.h5ad
-2025-03-13 13:10:24,196 - INFO - Reference data: /private/groups/russelllab/jodie/wolbachia_induced_DE/scanpy_clustering/scanpy_objects/peng_2024_fruitfly_organogenesis_subsampled.h5ad
-2025-03-13 13:10:24,196 - INFO - Output directory: /private/groups/russelllab/jodie/wolbachia_induced_DE/wolbachia_induced_differentiation/scripts/celltype_clustering/claude/MNN_kNN_tree/embryo_atlas_v3
-2025-03-13 13:10:24,196 - INFO - Loading data files...
-2025-03-13 13:10:24,360 - INFO - Bulk dataset loaded: (24, 10957) (samples × genes)
-2025-03-13 13:10:24,664 - INFO - Reference dataset loaded: (9126, 17650) (cells × genes)
-2025-03-13 13:10:24,671 - ERROR - No shared genes between bulk and reference datasets!
